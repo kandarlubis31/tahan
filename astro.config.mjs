@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { lastmodByUrl } from './scripts/lastmod.mjs';
+import { rehypeScopeHeadingIds } from './scripts/rehype-scope-heading-ids.mjs';
 
 export default defineConfig({
   site: 'https://tahan-five.vercel.app',
@@ -17,6 +18,9 @@ export default defineConfig({
   build: {
     format: 'directory',
     inlineStylesheets: 'always',
+  },
+  markdown: {
+    rehypePlugins: [rehypeScopeHeadingIds],
   },
   devToolbar: {
     enabled: false,

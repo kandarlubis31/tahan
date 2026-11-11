@@ -17,7 +17,8 @@
     "check:budget": "node scripts/check-budget.mjs",
     "check:meta": "node scripts/check-meta.mjs",
     "check:links": "node scripts/check-links.mjs",
-    "check:jsonld": "node scripts/check-jsonld.mjs"
+    "check:jsonld": "node scripts/check-jsonld.mjs",
+    "check:structure": "node scripts/check-structure.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
