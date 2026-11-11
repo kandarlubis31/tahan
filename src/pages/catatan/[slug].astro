@@ -27,7 +27,13 @@ const jsonLd = {
 };
 ---
 
-<BaseLayout title={d.title} description={d.dek} jsonLd={jsonLd}>
+<BaseLayout
+  title={d.title}
+  description={d.dek}
+  jsonLd={jsonLd}
+  ogType="article"
+  modifiedTime={d.updated}
+>
   <header class="page-head">
     <div class="wrap">
       <div class="page-head__top">
