@@ -46,6 +46,11 @@ Tagline:
   halaman aliran, catatan, glosarium, latihan, sumber, tentang, katalog, 404,
   penanda progres localStorage di halaman teknik.
 - Build terakhir: 34 halaman, 0 error; `pnpm check` 45 file, 0 error.
+- Lighthouse mobile (2026-11-11): performance 99, accessibility 100,
+  best-practices 100, SEO 100. FCP 1.5 s, LCP 1.7 s (target < 1.5 s belum
+  terpenuhi di throttling mobile; lihat §11), CLS 0, TBT 0 ms.
+  Perbaikan yang menyusul audit: `--muted` digelapkan `#6e675a` → `#6a6357`
+  karena kontras di atas `--paper-2` hanya 4.37:1 (wajib 4.5:1).
 - Sitemap aktif lewat `@astrojs/sitemap` (`/sitemap-index.xml`), dirujuk
   dari `robots.txt`, dan 404 tidak ikut. JSON-LD `WebSite`/`Organization`
   ada di setiap halaman; halaman teknik memakai `TechArticle`, catatan dan
@@ -545,11 +550,14 @@ keterbatasan, bukan fakta.
 rutinitas, 30 istilah glosarium, dan penanda progres localStorage sudah
 selesai. Yang belum masuk v1.0.0:
 
-1. Setelah domain dikunci, isi `site` di `astro.config.mjs`. Canonical dan
-   URL OG absolute akan aktif otomatis.
-2. Jalankan Lighthouse mobile pada preview/deploy; target performance,
-   a11y, dan SEO >= 95.
-3. Sitemap sudah aktif; tinggal dicek ulang setelah ada domain kustom.
+1. `site` sudah diisi (`https://tahan-five.vercel.app`); canonical dan URL OG
+   absolute aktif. Ganti nilainya kalau domain kustom dikunci.
+2. Lighthouse mobile sudah dijalankan (2026-11-11): performance 99,
+   accessibility 100, best-practices 100, SEO 100 — semua di atas target 95.
+   Sisa satu metrik di bawah target: LCP 1.7 s (target < 1.5 s) pada
+   throttling mobile 4G. Kandidat perbaikan: inline CSS kritis atau kurangi
+   render-blocking, ukur ulang setelah perubahan.
+3. Sitemap aktif dan terverifikasi di build. Cek ulang setelah domain kustom.
 4. Perbarui `PLAN.md` bila scope berubah.
 
 Jangan sentuh modul v1.1.0 sebelum v1.0.0 selesai.
