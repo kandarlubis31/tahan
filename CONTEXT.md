@@ -495,6 +495,12 @@ Angka di tabel ini dijaga otomatis. `pnpm build && pnpm check:budget`
 CSS, dan total JS, lalu keluar dengan exit 1 kalau ada yang lewat. CI
 menjalankan langkah itu setelah build, jadi budget tidak bisa dilanggar tanpa
 ketahuan.
+
+Tautan juga dijaga: `pnpm check:links` (`scripts/check-links.mjs`) membaca
+`dist/`, memastikan setiap tautan internal menuju halaman yang ada, dan
+memastikan setiap `#anchor` benar-benar ada di halaman tujuan. Tautan luar
+tidak diperiksa karena butuh jaringan. Kondisi awal: 34 halaman, 639 tautan
+internal, 124 anchor, tanpa temuan.
 | JS v1.0.0 | < 8 KB |
 | Font | < 180 KB |
 | LCP mobile 4G | < 1.5 s |
