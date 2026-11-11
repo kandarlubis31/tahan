@@ -485,9 +485,16 @@ Schema harus menolak halaman teknik yang tidak punya `safety` atau `sources`.
 | HTML per halaman | < 30 KB |
 | CSS total | < 25 KB |
 
-Catatan: sejak CSS di-inline penuh (§2), HTML mentah memuat CSS 27 KB utuh,
-sehingga berkas mentah beranda 39,6 KB. Patokan 30 KB dihitung dari HTML
-terkompresi (~9–10 KB per halaman); angkanya tetap di bawah patokan.
+Catatan ukuran HTML: sejak CSS di-inline penuh (§2), HTML mentah memuat CSS
+27 KB utuh, jadi berkas mentah beranda 39,6 KB dan halaman dalam 46–52 KB.
+Yang dibatasi adalah ukuran yang dikirim di jaringan: HTML gzip terbesar saat
+ini 13,1 KB (`/panduan/00-prinsip/`). Patokan gzip-nya 15 KB per halaman.
+
+Angka di tabel ini dijaga otomatis. `pnpm build && pnpm check:budget`
+(`scripts/check-budget.mjs`) mengukur HTML gzip terbesar, total font, total
+CSS, dan total JS, lalu keluar dengan exit 1 kalau ada yang lewat. CI
+menjalankan langkah itu setelah build, jadi budget tidak bisa dilanggar tanpa
+ketahuan.
 | JS v1.0.0 | < 8 KB |
 | Font | < 180 KB |
 | LCP mobile 4G | < 1.5 s |
