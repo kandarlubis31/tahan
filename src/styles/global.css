@@ -351,6 +351,14 @@ ol {
   color: var(--accent-dark);
 }
 
+.footer-nav a[aria-current="page"] {
+  color: var(--accent-dark);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
 .footer-print {
   align-self: flex-start;
   padding: 0;
