@@ -1,0 +1,89 @@
+---
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+---
+
+<div class="progress-toggle" data-progress-toggle data-slug={slug}>
+  <p class="progress-toggle__status" data-progress-status aria-live="polite">
+    Belum ditandai dilatih.
+  </p>
+  <button
+    class="button button--ghost progress-toggle__button"
+    type="button"
+    data-progress-button
+    aria-pressed="false"
+  >
+    Tandai sudah dilatih
+  </button>
+  <p class="progress-toggle__note">
+    Tersimpan di browser ini. Tidak ada akun dan tidak ada data yang dikirim.
+  </p>
+  <noscript>
+    <p class="progress-toggle__note">
+      Penanda progres membutuhkan JavaScript.
+    </p>
+  </noscript>
+</div>
+
+<script>
+  import { isTrained, toggleTrained } from "../scripts/progress";
+
+  document
+    .querySelectorAll<HTMLElement>("[data-progress-toggle]")
+    .forEach((root) => {
+      const slug = root.dataset.slug;
+      const button = root.querySelector<HTMLButtonElement>(
+        "[data-progress-button]",
+      );
+      const status = root.querySelector<HTMLElement>(
+        "[data-progress-status]",
+      );
+      if (!slug || !button || !status) return;
+
+      const render = (trained: boolean) => {
+        button.setAttribute("aria-pressed", String(trained));
+        button.textContent = trained
+          ? "Batalkan tanda"
+          : "Tandai sudah dilatih";
+        status.textContent = trained
+          ? "Sudah ditandai dilatih di perangkat ini."
+          : "Belum ditandai dilatih.";
+        root.dataset.trained = String(trained);
+      };
+
+      render(isTrained(slug));
+
+      button.addEventListener("click", () => {
+        const next = toggleTrained(slug);
+        if (!next) {
+          status.textContent =
+            "Browser menolak menyimpan progres. Periksa pengaturan penyimpanan.";
+          return;
+        }
+        render(next.trained.includes(slug));
+      });
+    });
+</script>
+
+<style>
+  .progress-toggle__status {
+    margin-bottom: 10px;
+    font-size: 0.9375rem;
+    line-height: 1.45;
+  }
+
+  .progress-toggle__button {
+    width: 100%;
+    padding-inline: 12px;
+  }
+
+  .progress-toggle__note {
+    margin: 10px 0 0;
+    color: var(--muted);
+    font-size: 0.8125rem;
+    line-height: 1.45;
+  }
+</style>

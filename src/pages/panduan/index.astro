@@ -1,0 +1,125 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import MarginNote from "../../components/MarginNote.astro";
+import ProgressSummary from "../../components/ProgressSummary.astro";
+
+const techniqueSlugs = [
+  "palm-strike",
+  "front-kick",
+  "tangkisan-360",
+  "wrist-release",
+  "o-goshi",
+  "double-leg",
+  "sprawl",
+  "shrimp",
+  "bridge",
+  "technical-stand-up",
+  "guard",
+  "mount-escape",
+];
+
+const chapters = [
+  {
+    num: "00",
+    title: "Prinsip",
+    desc: "Empat catatan yang dipakai di seluruh situs: hindari dulu, jarak adalah keputusan, posisi sebelum kuncian, tap bukan kalah.",
+    meta: "4 catatan",
+    href: "/panduan/00-prinsip",
+    available: true,
+  },
+  {
+    num: "01",
+    title: "Jauh",
+    desc: "Sikap siap dan pagar tangan. Membaca arah, menjaga jarak, dan memilih kapan pergi.",
+    meta: "1 artikel",
+    href: "/panduan/01-jauh",
+    available: true,
+  },
+  {
+    num: "02",
+    title: "Berdiri",
+    desc: "Palm strike, tendangan depan ke selangkangan, tangkisan 360. Keterampilan untuk kontak pertama.",
+    meta: "3 teknik",
+    href: "/panduan/02-berdiri",
+    available: true,
+  },
+  {
+    num: "03",
+    title: "Clinch",
+    desc: "Lepas cengkeraman, O-goshi, double leg takedown, sprawl. Saat jarak sudah hilang.",
+    meta: "4 teknik",
+    href: "/panduan/03-clinch",
+    available: true,
+  },
+  {
+    num: "04",
+    title: "Tanah",
+    desc: "Shrimp, bridge dan roll, technical stand-up, bertahan di guard, lepas dari mount.",
+    meta: "5 teknik",
+    href: "/panduan/04-tanah",
+    available: true,
+  },
+];
+---
+
+<BaseLayout
+  title="Panduan"
+  description="Lima bab TAHAN: prinsip, jauh, berdiri, clinch, dan tanah. Disusun menurut jarak, bukan menurut aliran."
+>
+  <header class="page-head">
+    <div class="wrap">
+      <div class="page-head__top">
+        <p class="label">Panduan · Edisi 1.0.0</p>
+        <p class="label">5 bab</p>
+      </div>
+      <h1>Panduan</h1>
+      <p class="page-head__lede">
+        Lima bab. Empat jarak. Satu urutan keputusan: hindari, lepas, lari.
+        Setiap bab bisa dibaca sendiri, tetapi urutannya disusun dari jarak
+        terjauh sampai lantai.
+      </p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="wrap">
+      <ProgressSummary slugs={techniqueSlugs} />
+
+      <div class="chapter-list">
+        {
+          chapters.map((chapter) =>
+            chapter.href ? (
+              <a class="chapter-row chapter-row--link" href={chapter.href}>
+                <span class="chapter-row__num">{chapter.num}</span>
+                <span>
+                  <span class="chapter-row__title">{chapter.title}</span>
+                  <span class="chapter-row__desc">{chapter.desc}</span>
+                </span>
+                <span class="chapter-row__meta">
+                  {chapter.meta}
+                  <strong>Tersedia</strong>
+                </span>
+              </a>
+            ) : (
+              <div class="chapter-row">
+                <span class="chapter-row__num">{chapter.num}</span>
+                <span>
+                  <span class="chapter-row__title">{chapter.title}</span>
+                  <span class="chapter-row__desc">{chapter.desc}</span>
+                </span>
+                <span class="chapter-row__meta">{chapter.meta}</span>
+              </div>
+            ),
+          )
+        }
+      </div>
+
+      <MarginNote>
+        <p>
+          Edisi 1.0.0: tujuh artikel dan dua belas teknik inti sudah tersedia.
+          Mulai dari prinsip, lalu ikuti urutan jarak sampai tanah.
+        </p>
+      </MarginNote>
+    </div>
+  </section>
+</BaseLayout>

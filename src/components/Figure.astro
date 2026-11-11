@@ -1,0 +1,21 @@
+---
+interface Props {
+  number: string;
+  caption: string;
+}
+
+const { number, caption } = Astro.props;
+---
+
+<figure class="figure">
+  <div class="figure__scroll">
+    <slot />
+  </div>
+  <p class="figure__hint label" aria-hidden="true">
+    Geser diagram <span aria-hidden="true">→</span>
+  </p>
+  <figcaption class="figure__caption">
+    <span class="figure__number">Gambar {number}</span>
+    <span>{caption}</span>
+  </figcaption>
+</figure>

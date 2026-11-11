@@ -1,0 +1,139 @@
+---
+import Figure from "../Figure.astro";
+
+interface Props {
+  frame: 1 | 2 | 3;
+  number: string;
+  alt: string;
+  caption: string;
+}
+
+const { frame, number, alt, caption } = Astro.props;
+const titleId = `guard-figure-${frame}`;
+---
+
+<Figure number={number} caption={caption}>
+  {
+    frame === 1 && (
+      <svg
+        class="diagram"
+        viewBox="0 0 720 400"
+        role="img"
+        aria-labelledby={titleId}
+      >
+        <title id={titleId}>{alt}</title>
+        <text x="40" y="28" class="diagram__note">
+          01 / GUARD TERTUTUP
+        </text>
+        <text x="680" y="28" class="diagram__note" text-anchor="end">
+          TAMPAK SAMPING
+        </text>
+        <line x1="40" y1="44" x2="680" y2="44" class="diagram__tick" />
+        <line x1="40" y1="330" x2="680" y2="330" class="diagram__ground" />
+
+        <circle class="diagram__main" cx="230" cy="286" r="24" />
+        <rect
+          class="diagram__main"
+          x="254"
+          y="258"
+          width="160"
+          height="56"
+          rx="28"
+        />
+        <path class="diagram__main-soft" d="M270 272 L300 234 L330 226" />
+        <path class="diagram__main-limb" d="M414 286 L470 260 L520 250" />
+        <path class="diagram__main-limb" d="M254 286 L200 316 L160 324" />
+        <path class="diagram__main-limb" d="M264 300 L300 326 L340 330" />
+
+        <circle class="diagram__opp" cx="430" cy="236" r="24" />
+        <rect
+          class="diagram__opp"
+          x="386"
+          y="208"
+          width="90"
+          height="86"
+          rx="28"
+        />
+        <path class="diagram__opp-soft" d="M410 228 L360 248 L320 260" />
+        <path class="diagram__opp-limb" d="M422 246 L370 266 L330 280" />
+        <path class="diagram__opp-soft" d="M470 228 L520 248 L560 260" />
+        <path class="diagram__opp-limb" d="M458 246 L510 266 L550 280" />
+
+        <text x="230" y="372" class="diagram__label" text-anchor="middle">
+          ANDA
+        </text>
+        <text x="430" y="170" class="diagram__label" text-anchor="middle">
+          LAWAN
+        </text>
+        <text x="40" y="352" class="diagram__note">
+          MATRAS
+        </text>
+        <text x="330" y="170" class="diagram__label diagram__label--accent">
+          GUARD TERTUTUP
+        </text>
+      </svg>
+    )
+  }
+
+  {
+    frame === 2 && (
+      <svg
+        class="diagram"
+        viewBox="0 0 720 400"
+        role="img"
+        aria-labelledby={titleId}
+      >
+        <title id={titleId}>{alt}</title>
+        <text x="40" y="28" class="diagram__note">
+          02 / KAKI DI PINGGUL
+        </text>
+        <text x="680" y="28" class="diagram__note" text-anchor="end">
+          TAMPAK SAMPING
+        </text>
+        <line x1="40" y1="44" x2="680" y2="44" class="diagram__tick" />
+        <line x1="40" y1="330" x2="680" y2="330" class="diagram__ground" />
+
+        <circle class="diagram__main" cx="250" cy="286" r="24" />
+        <rect
+          class="diagram__main"
+          x="274"
+          y="258"
+          width="160"
+          height="56"
+          rx="28"
+        />
+        <path class="diagram__main-soft" d="M270 272 L300 234 L330 226" />
+        <path class="diagram__main-limb" d="M414 286 L470 250 L520 230" />
+        <path class="diagram__main-limb" d="M254 286 L200 316 L160 324" />
+        <path class="diagram__main-limb" d="M264 300 L300 326 L340 330" />
+
+        <circle class="diagram__opp" cx="470" cy="220" r="24" />
+        <rect
+          class="diagram__opp"
+          x="426"
+          y="192"
+          width="90"
+          height="86"
+          rx="28"
+        />
+        <path class="diagram__opp-soft" d="M450 212 L400 232 L360 244" />
+        <path class="diagram__opp-limb" d="M462 230 L410 250 L370 264" />
+        <path class="diagram__opp-soft" d="M510 212 L560 232 L600 244" />
+        <path class="diagram__opp-limb" d="M498 230 L550 250 L590 264" />
+
+        <text x="250" y="372" class="diagram__label" text-anchor="middle">
+          ANDA
+        </text>
+        <text x="470" y="150" class="diagram__label" text-anchor="middle">
+          LAWAN
+        </text>
+        <text x="40" y="352" class="diagram__note">
+          MATRAS
+        </text>
+        <text x="360" y="170" class="diagram__label diagram__label--accent">
+          KAKI DI PINGGUL
+        </text>
+      </svg>
+    )
+  }
+</Figure>

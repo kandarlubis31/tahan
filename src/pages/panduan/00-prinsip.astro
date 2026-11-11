@@ -1,0 +1,155 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SafetyBox from "../../components/SafetyBox.astro";
+import MarginNote from "../../components/MarginNote.astro";
+
+const entries = (
+  await getCollection("artikel", ({ data }) => data.type === "prinsip")
+).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+
+const articles = await Promise.all(
+  entries.map(async (entry) => ({
+    entry,
+    Content: (await render(entry)).Content,
+  })),
+);
+---
+
+<BaseLayout
+  title="Bab 00 · Prinsip"
+  description="Empat catatan yang dipakai di seluruh TAHAN: hindari dulu, jarak adalah keputusan, posisi sebelum kuncian, tap bukan kalah."
+>
+  <header class="chapter-hero">
+    <div class="wrap">
+      <div class="chapter-hero__top">
+        <p class="label">Bab 00 · Prinsip</p>
+        <p class="label">{articles.length} catatan</p>
+      </div>
+
+      <div class="chapter-hero__main">
+        <p class="chapter-hero__number" aria-hidden="true">00</p>
+        <div>
+          <h1>Prinsip</h1>
+          <p class="chapter-hero__deck">
+            Empat catatan yang dipakai di seluruh situs. Semua teknik, semua
+            bab, dan semua latihan mengacu pada empat hal ini.
+          </p>
+        </div>
+      </div>
+
+      <div class="chapter-hero__foot">
+        <p class="label">Sebelum jarak</p>
+        <p>
+          Jarak belum ada. Yang ada keputusan: apakah masuk, apakah keluar,
+          dan apakah perlu mempertahankan diri sama sekali.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap chapter-layout">
+    <article class="prose">
+      <p>
+        Prinsip bukan motivasi. Prinsip adalah filter: kalau sebuah teknik
+        melanggar salah satu dari empat catatan ini, teknik itu tidak masuk
+        situs ini.
+      </p>
+
+      {
+        articles.map(({ entry, Content }) => (
+          <section class="principle" id={entry.data.slug}>
+            <p class="label">Prinsip {entry.data.order}</p>
+            <h2>{entry.data.title}</h2>
+            <p class="principle__lead">{entry.data.lead}</p>
+            <Content />
+          </section>
+        ))
+      }
+
+      <SafetyBox>
+        <ul>
+          <li>Latihan berpasangan hanya di matras, dengan pengawasan.</li>
+          <li>Cekikan tidak dilatih tanpa pelatih.</li>
+          <li>Tap lebih awal. Tap adalah sinyal, bukan kekalahan.</li>
+          <li>Hentikan latihan jika leher, lutut, atau punggung nyeri.</li>
+        </ul>
+      </SafetyBox>
+
+      <MarginNote>
+        <p>
+          Prinsip ini dipakai sebagai koreksi diri. Kalau sebuah teknik
+          tidak sesuai dengan salah satu catatan di atas, teknik itu tidak
+          diajarkan di sini.
+        </p>
+      </MarginNote>
+    </article>
+
+    <aside class="chapter-aside">
+      <section>
+        <h2>Di bab ini</h2>
+        <ul class="aside-list">
+          {
+            articles.map(({ entry }) => (
+              <li>
+                <span>{String(entry.data.order).padStart(2, "0")}</span>
+                <a href={`#${entry.data.slug}`}>{entry.data.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section>
+        <h2>Prasyarat</h2>
+        <p>Tidak ada. Bab ini dibaca sebelum teknik apa pun.</p>
+      </section>
+
+      <section>
+        <h2>Batas</h2>
+        <p>
+          Prinsip bukan teknik. Prinsip dipakai untuk memilih teknik, bukan
+          untuk menggantikannya.
+        </p>
+      </section>
+    </aside>
+  </div>
+
+  <div class="wrap">
+    <nav class="page-nav" aria-label="Navigasi bab">
+      <a href="/panduan">
+        <span class="label">Kembali</span>
+        <strong>Semua bab</strong>
+      </a>
+      <a href="/panduan/01-jauh">
+        <span class="label">Lanjut</span>
+        <strong>Bab 01 · Jauh</strong>
+      </a>
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  .principle + .principle {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .principle .label {
+    margin-bottom: 10px;
+    color: var(--accent-dark);
+  }
+
+  .principle h2 {
+    margin-top: 0;
+  }
+
+  .principle__lead {
+    max-width: 52ch;
+    margin-bottom: 1.4em;
+    color: var(--muted);
+    font-size: 1.15rem;
+    font-style: italic;
+  }
+</style>

@@ -1,0 +1,255 @@
+---
+import Figure from "../Figure.astro";
+
+interface Props {
+  frame: 1 | 2 | 3;
+  number: string;
+  alt: string;
+  caption: string;
+}
+
+const { frame, number, alt, caption } = Astro.props;
+const titleId = `shrimp-figure-${frame}`;
+---
+
+<Figure number={number} caption={caption}>
+  {
+    frame === 1 && (
+      <svg
+        class="diagram"
+        viewBox="0 0 720 400"
+        role="img"
+        aria-labelledby={titleId}
+      >
+        <title id={titleId}>{alt}</title>
+        <text x="40" y="28" class="diagram__note">
+          01 / POSISI AWAL
+        </text>
+        <text x="680" y="28" class="diagram__note" text-anchor="end">
+          TAMPAK SAMPING
+        </text>
+        <line x1="40" y1="44" x2="680" y2="44" class="diagram__tick" />
+        <line x1="40" y1="330" x2="680" y2="330" class="diagram__ground" />
+
+        <path class="diagram__opp-soft" d="M570 230 L520 250 L478 262" />
+        <path class="diagram__opp-limb" d="M578 248 L530 270 L488 280" />
+        <path class="diagram__opp-soft" d="M595 290 L555 315 L525 326" />
+        <path class="diagram__opp-limb" d="M620 292 L660 316 L690 326" />
+        <circle class="diagram__opp" cx="600" cy="178" r="24" />
+        <rect
+          class="diagram__opp"
+          x="556"
+          y="208"
+          width="90"
+          height="86"
+          rx="28"
+        />
+
+        <path class="diagram__main-soft" d="M210 265 L225 225 L255 212" />
+        <path class="diagram__main-limb" d="M210 285 L255 240 L305 225" />
+        <path class="diagram__main-soft" d="M350 278 L445 225 L505 322" />
+        <path class="diagram__main-limb" d="M350 290 L465 250 L520 324" />
+        <circle class="diagram__main" cx="150" cy="270" r="24" />
+        <rect
+          class="diagram__main"
+          x="174"
+          y="242"
+          width="180"
+          height="56"
+          rx="28"
+        />
+
+        <text x="150" y="372" class="diagram__label" text-anchor="middle">
+          ANDA
+        </text>
+        <text x="610" y="372" class="diagram__label" text-anchor="middle">
+          LAWAN
+        </text>
+        <text x="40" y="352" class="diagram__note">
+          MATRAS
+        </text>
+        <path class="diagram__leader" d="M300 180 L305 218" />
+        <text x="250" y="172" class="diagram__label diagram__label--accent">
+          FRAME
+        </text>
+      </svg>
+    )
+  }
+
+  {
+    frame === 2 && (
+      <svg
+        class="diagram"
+        viewBox="0 0 720 400"
+        role="img"
+        aria-labelledby={titleId}
+      >
+        <title id={titleId}>{alt}</title>
+        <text x="40" y="28" class="diagram__note">
+          02 / ANGKAT DAN GESER
+        </text>
+        <text x="680" y="28" class="diagram__note" text-anchor="end">
+          TAMPAK SAMPING
+        </text>
+        <line x1="40" y1="44" x2="680" y2="44" class="diagram__tick" />
+        <line x1="40" y1="330" x2="680" y2="330" class="diagram__ground" />
+
+        <path class="diagram__opp-soft" d="M575 240 L525 260 L485 272" />
+        <path class="diagram__opp-limb" d="M582 258 L535 278 L498 290" />
+        <path class="diagram__opp-soft" d="M600 290 L560 315 L530 326" />
+        <path class="diagram__opp-limb" d="M625 292 L665 316 L695 326" />
+        <circle class="diagram__opp" cx="610" cy="188" r="24" />
+        <rect
+          class="diagram__opp"
+          x="566"
+          y="218"
+          width="90"
+          height="86"
+          rx="28"
+        />
+
+        <g transform="rotate(-8 300 278)">
+          <rect
+            class="diagram__main"
+            x="164"
+            y="250"
+            width="180"
+            height="56"
+            rx="28"
+          />
+        </g>
+        <circle class="diagram__main" cx="140" cy="278" r="24" />
+        <path class="diagram__main-soft" d="M198 270 L220 232 L252 220" />
+        <path class="diagram__main-limb" d="M202 288 L260 292 L330 290" />
+        <path class="diagram__main-soft" d="M344 282 L445 230 L500 324" />
+        <path class="diagram__main-limb" d="M344 270 L425 200 L480 324" />
+
+        <path
+          class="diagram__arrow"
+          d="M352 266 C390 224 348 190 290 198"
+          marker-end={`url(#shrimp-arrow-${frame})`}
+        />
+        <defs>
+          <marker
+            id={`shrimp-arrow-${frame}`}
+            viewBox="0 0 6 6"
+            refX="5"
+            refY="3"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto"
+            markerUnits="strokeWidth"
+          >
+            <path class="diagram__arrow-head" d="M0 0 L6 3 L0 6 Z" />
+          </marker>
+        </defs>
+
+        <text x="150" y="372" class="diagram__label" text-anchor="middle">
+          ANDA
+        </text>
+        <text x="615" y="372" class="diagram__label" text-anchor="middle">
+          LAWAN
+        </text>
+        <text x="40" y="352" class="diagram__note">
+          MATRAS
+        </text>
+        <text x="300" y="170" class="diagram__label diagram__label--accent">
+          ANGKAT + GESER
+        </text>
+      </svg>
+    )
+  }
+
+  {
+    frame === 3 && (
+      <svg
+        class="diagram"
+        viewBox="0 0 720 400"
+        role="img"
+        aria-labelledby={titleId}
+      >
+        <title id={titleId}>{alt}</title>
+        <text x="40" y="28" class="diagram__note">
+          03 / LUTUT MASUK
+        </text>
+        <text x="680" y="28" class="diagram__note" text-anchor="end">
+          TAMPAK SAMPING
+        </text>
+        <line x1="40" y1="44" x2="680" y2="44" class="diagram__tick" />
+        <line x1="40" y1="330" x2="680" y2="330" class="diagram__ground" />
+
+        <path class="diagram__opp-soft" d="M576 240 L528 258 L492 270" />
+        <path class="diagram__opp-limb" d="M584 258 L530 276 L470 284" />
+        <path class="diagram__opp-soft" d="M600 300 L565 320 L535 328" />
+        <path class="diagram__opp-limb" d="M625 302 L665 320 L695 328" />
+        <circle class="diagram__opp" cx="620" cy="190" r="24" />
+        <rect
+          class="diagram__opp"
+          x="576"
+          y="220"
+          width="90"
+          height="86"
+          rx="28"
+        />
+
+        <circle class="diagram__main" cx="120" cy="282" r="24" />
+        <rect
+          class="diagram__main"
+          x="144"
+          y="254"
+          width="170"
+          height="56"
+          rx="28"
+        />
+        <path class="diagram__main-soft" d="M188 270 L218 240 L250 232" />
+        <path class="diagram__main-limb" d="M310 292 L390 318 L470 326" />
+        <path class="diagram__main-limb" d="M310 276 L395 220 L460 305" />
+        <path class="diagram__main-limb" d="M194 292 L280 280 L390 285" />
+
+        <path
+          class="diagram__arrow"
+          d="M330 192 L382 214"
+          marker-end={`url(#shrimp-arrow-${frame})`}
+        />
+        <defs>
+          <marker
+            id={`shrimp-arrow-${frame}`}
+            viewBox="0 0 6 6"
+            refX="5"
+            refY="3"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto"
+            markerUnits="strokeWidth"
+          >
+            <path class="diagram__arrow-head" d="M0 0 L6 3 L0 6 Z" />
+          </marker>
+        </defs>
+
+        <path class="diagram__tick" d="M336 344 L336 337" />
+        <path class="diagram__tick" d="M336 341 L442 341" />
+        <path class="diagram__tick" d="M442 344 L442 337" />
+
+        <text x="120" y="372" class="diagram__label" text-anchor="middle">
+          ANDA
+        </text>
+        <text x="620" y="372" class="diagram__label" text-anchor="middle">
+          LAWAN
+        </text>
+        <text x="388" y="372" class="diagram__label" text-anchor="middle">
+          RUANG
+        </text>
+        <text x="40" y="352" class="diagram__note">
+          MATRAS
+        </text>
+        <text x="300" y="178" class="diagram__label diagram__label--accent">
+          LUTUT MASUK
+        </text>
+        <path class="diagram__leader" d="M330 242 L378 278" />
+        <text x="300" y="238" class="diagram__label diagram__label--accent">
+          FRAME
+        </text>
+      </svg>
+    )
+  }
+</Figure>

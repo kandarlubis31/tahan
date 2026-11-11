@@ -1,0 +1,286 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShrimpFigure from '../../components/diagrams/ShrimpFigure.astro';
+import BridgeFigure from '../../components/diagrams/BridgeFigure.astro';
+import TechnicalStandUpFigure from '../../components/diagrams/TechnicalStandUpFigure.astro';
+import GuardFigure from '../../components/diagrams/GuardFigure.astro';
+import MountEscapeFigure from '../../components/diagrams/MountEscapeFigure.astro';
+import PalmStrikeFigure from '../../components/diagrams/PalmStrikeFigure.astro';
+import FrontKickFigure from '../../components/diagrams/FrontKickFigure.astro';
+import ThreeSixtyBlockFigure from '../../components/diagrams/ThreeSixtyBlockFigure.astro';
+import WristReleaseFigure from '../../components/diagrams/WristReleaseFigure.astro';
+import OGoshiFigure from '../../components/diagrams/OGoshiFigure.astro';
+import DoubleLegFigure from '../../components/diagrams/DoubleLegFigure.astro';
+import SprawlFigure from '../../components/diagrams/SprawlFigure.astro';
+import StepList from '../../components/StepList.astro';
+import SafetyBox from '../../components/SafetyBox.astro';
+import MarginNote from '../../components/MarginNote.astro';
+import ProgressToggle from '../../components/ProgressToggle.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('teknik');
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const slug = entry.id;
+---
+
+<BaseLayout
+  title={d.title}
+  description={d.summary}
+>
+  <header class="technique-head">
+    <div class="wrap">
+      <div class="technique-head__crumbs label">
+        <a href="/teknik">Teknik</a>
+        <span aria-hidden="true">/</span>
+        <a href="/panduan/04-tanah">Bab 04 · Tanah</a>
+        <span aria-hidden="true">/</span>
+        <span>{d.title}</span>
+      </div>
+
+      <h1>{d.title}</h1>
+      <p class="technique-head__deck">
+        {d.principle}
+      </p>
+
+      <dl class="technique-meta">
+        <div>
+          <dt>Aliran</dt>
+          <dd>{d.origin === 'bjj' ? 'BJJ' : d.origin === 'judo' ? 'Judo' : d.origin === 'gulat' ? 'Gulat' : d.origin === 'krav-maga' ? 'Krav Maga' : 'Umum'}</dd>
+        </div>
+        <div>
+          <dt>Jarak</dt>
+          <dd>{d.range.charAt(0).toUpperCase() + d.range.slice(1)}</dd>
+        </div>
+        <div>
+          <dt>Tingkat</dt>
+          <dd>{d.level === 'dasar' ? 'Dasar' : 'Menengah'}</dd>
+        </div>
+        <div>
+          <dt>Risiko</dt>
+          <dd>{d.risk.charAt(0).toUpperCase() + d.risk.slice(1)}</dd>
+        </div>
+        <div>
+          <dt>Partner</dt>
+          <dd>{d.partner ? 'Ya' : 'Tidak'}</dd>
+        </div>
+      </dl>
+    </div>
+  </header>
+
+  <div class="wrap technique-layout">
+    <article class="prose">
+      <Content />
+
+      <h2 id="urutan">Urutan</h2>
+      <p>
+        Urutan di bawah adalah versi dasar. Tiap langkah punya cue pendek dan
+        penjelasan singkat.
+      </p>
+
+      {
+        d.figures.map((fig, i) => (
+          slug === 'shrimp' ? (
+            <ShrimpFigure
+              frame={(i + 1) as 1 | 2 | 3}
+              number={fig.id}
+              alt={fig.alt}
+              caption={fig.caption}
+            />
+          ) : slug === 'bridge' ? (
+            <BridgeFigure
+              frame={(i + 1) as 1 | 2 | 3}
+              number={fig.id}
+              alt={fig.alt}
+              caption={fig.caption}
+            />
+          ) : slug === 'technical-stand-up' ? (
+            <TechnicalStandUpFigure
+              frame={(i + 1) as 1 | 2 | 3}
+              number={fig.id}
+              alt={fig.alt}
+              caption={fig.caption}
+            />
+          ) : slug === 'guard' ? (
+            <GuardFigure
+              frame={(i + 1) as 1 | 2 | 3}
+              number={fig.id}
+              alt={fig.alt}
+              caption={fig.caption}
+            />
+          ) : slug === 'mount-escape' ? (
+            <MountEscapeFigure
+              frame={(i + 1) as 1 | 2 | 3}
+              number={fig.id}
+              alt={fig.alt}
+              caption={fig.caption}
+            />
+          ) : slug === 'palm-strike' ? (
+            <PalmStrikeFigure
+              frame={(i + 1) as 1 | 2 | 3}
+              number={fig.id}
+              alt={fig.alt}
+              caption={fig.caption}
+            />
+          ) : slug === 'front-kick' ? (
+            <FrontKickFigure
+              frame={(i + 1) as 1 | 2 | 3}
+              number={fig.id}
+              alt={fig.alt}
+              caption={fig.caption}
+            />
+          ) : slug === 'tangkisan-360' ? (
+            <ThreeSixtyBlockFigure
+              frame={(i + 1) as 1 | 2 | 3}
+              number={fig.id}
+              alt={fig.alt}
+              caption={fig.caption}
+            />
+          ) : slug === 'wrist-release' ? (
+            <WristReleaseFigure
+              frame={(i + 1) as 1 | 2 | 3}
+              number={fig.id}
+              alt={fig.alt}
+              caption={fig.caption}
+            />
+          ) : slug === 'o-goshi' ? (
+            <OGoshiFigure
+              frame={(i + 1) as 1 | 2 | 3}
+              number={fig.id}
+              alt={fig.alt}
+              caption={fig.caption}
+            />
+          ) : slug === 'double-leg' ? (
+            <DoubleLegFigure
+              frame={(i + 1) as 1 | 2 | 3}
+              number={fig.id}
+              alt={fig.alt}
+              caption={fig.caption}
+            />
+          ) : slug === 'sprawl' ? (
+            <SprawlFigure
+              frame={(i + 1) as 1 | 2 | 3}
+              number={fig.id}
+              alt={fig.alt}
+              caption={fig.caption}
+            />
+          ) : null
+        ))
+      }
+
+      <StepList
+        steps={d.steps.map((s) => ({ title: s.cue, body: s.detail }))}
+      />
+
+      <h2 id="gagal">Kalau gagal</h2>
+      <p>{d.failure}</p>
+
+      <h2 id="kesalahan">Kesalahan umum</h2>
+      <ol>
+        {d.mistakes.map((m) => <li>{m}</li>)}
+      </ol>
+
+      <h2 id="latihan">Latihan</h2>
+      <p>{d.drill}</p>
+
+      <div id="batas">
+        <SafetyBox>
+          <p>{d.safety}</p>
+        </SafetyBox>
+      </div>
+
+      <MarginNote>
+        <p>
+          Ditinjau: {d.updated}. Halaman ini bagian dari fase pengembangan dan
+          menunggu review pengajar sebelum rilis 1.0.0.
+        </p>
+      </MarginNote>
+    </article>
+
+    <aside class="technique-aside">
+      <section>
+        <h2>Di halaman ini</h2>
+        <ul class="toc">
+          <li><a href="#kapan">Kapan dipakai <span>01</span></a></li>
+          <li><a href="#urutan">Urutan <span>02</span></a></li>
+          <li><a href="#gagal">Kalau gagal <span>03</span></a></li>
+          <li><a href="#kesalahan">Kesalahan umum <span>04</span></a></li>
+          <li><a href="#latihan">Latihan <span>05</span></a></li>
+          <li><a href="#batas">Batas aman <span>06</span></a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Cetak</h2>
+        <button class="button button--ghost print-button" type="button" data-print>
+          Cetak halaman
+        </button>
+        <p class="muted print-note">
+          Versi cetak menyembunyikan navigasi, tetapi tetap menampilkan
+          langkah dan sumber.
+        </p>
+      </section>
+
+      <section>
+        <h2>Ringkas</h2>
+        <dl class="meta-list">
+          <div>
+            <dt>Nama lain</dt>
+            <dd>{d.title === 'Shrimp' ? 'Hip escape' : d.title}</dd>
+          </div>
+          <div>
+            <dt>Waktu</dt>
+            <dd>10-15 menit</dd>
+          </div>
+          <div>
+            <dt>Alat</dt>
+            <dd>{d.mat ? 'Matras' : 'Tidak perlu'}</dd>
+          </div>
+          <div>
+            <dt>Partner</dt>
+            <dd>{d.partner ? 'Disarankan' : 'Tidak wajib'}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Progres latihan</h2>
+        <ProgressToggle slug={slug} />
+      </section>
+
+      <section class="technique-aside__sources">
+        <h2>Sumber</h2>
+        <ul class="aside-list">
+          {d.sources.map((s) => (
+            <li>
+              <span>{s.author ? `${s.author}` : ''}</span>
+              <strong>{s.title}</strong>
+              {s.note && <p class="muted">{s.note}</p>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  <div class="wrap">
+    <nav class="page-nav" aria-label="Navigasi halaman">
+      <a href={`/panduan/${d.chapter}`}>
+        <span class="label">Kembali</span>
+        <strong>Bab {d.chapter.slice(0, 2)} · {d.chapter.split('-')[1].replace(/^\w/, (c) => c.toUpperCase())}</strong>
+      </a>
+      <a href="/teknik">
+        <span class="label">Indeks</span>
+        <strong>Semua teknik</strong>
+      </a>
+    </nav>
+  </div>
+</BaseLayout>

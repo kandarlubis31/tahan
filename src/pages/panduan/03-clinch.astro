@@ -1,0 +1,153 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RangeScale from "../../components/RangeScale.astro";
+import SafetyBox from "../../components/SafetyBox.astro";
+import MarginNote from "../../components/MarginNote.astro";
+---
+
+<BaseLayout
+  title="Bab 03 · Clinch"
+  description="Lepas cengkeraman, O-goshi, double leg takedown, sprawl. Saat jarak sudah hilang."
+>
+  <header class="chapter-hero">
+    <div class="wrap">
+      <div class="chapter-hero__top">
+        <p class="label">Bab 03 · Clinch</p>
+        <p class="label">4 teknik</p>
+      </div>
+
+      <div class="chapter-hero__main">
+        <p class="chapter-hero__number" aria-hidden="true">03</p>
+        <div>
+          <h1>Clinch</h1>
+          <p class="chapter-hero__deck">
+            Jarak sudah hilang. Lepas cengkeraman, O-goshi, double leg
+            takedown, sprawl. Saat menempel, yang menentukan siapa yang
+            masih berdiri setelahnya.
+          </p>
+        </div>
+      </div>
+
+      <div class="chapter-hero__foot">
+        <p class="label">Jarak ketiga</p>
+        <p>
+          Menempel. Grip licin karena keringat, lantai tidak empuk, dan
+          lawan tidak jatuh tepat di tempat yang direncanakan.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <section class="range-section">
+    <div class="wrap">
+      <RangeScale active="clinch" />
+    </div>
+  </section>
+
+  <div class="wrap chapter-layout">
+    <article class="prose">
+      <p>
+        Clinch adalah jarak menempel. Di film, satu bantingan sudah cukup.
+        Di dunia nyata, yang menentukan bukan bantingannya, tapi siapa yang
+        masih berdiri setelahnya. Tujuan tetap keluar, bukan memenangkan
+        gulat.
+      </p>
+
+      <h2>Apa yang berubah di clinch</h2>
+      <p>
+        Tangan lawan sudah menempel. Kaki masih bebas, tetapi ruang gerak
+        menyempit. Grip menjadi penting. Bantingan ke permukaan keras bisa
+        mematikan; latih di matras, di jalan pakai hanya untuk keluar.
+      </p>
+
+      <h2>Empat teknik</h2>
+      <p>
+        Lepas cengkeraman untuk melepas grip. O-goshi untuk membanting
+        dengan kontrol. Double leg takedown untuk menjatuhkan dari jarak
+        kaki. Sprawl untuk bertahan dari double leg. Double leg dan sprawl
+        diletakkan berdekatan supaya pembaca melihat sisi menyerang dan
+        bertahan dari teknik yang sama.
+      </p>
+
+      <h2>Ukemi sebagai prasyarat</h2>
+      <p>
+        Bantingan dipelajari setelah ukemi. Tanpa ukemi, bantingan adalah
+        cedera. Latih jatuh dulu, baru banting.
+      </p>
+
+      <h2>Latihan dasar</h2>
+      <ol>
+        <li><strong>Ukemi.</strong> 3 set x 10 per sisi, pelan.</li>
+        <li><strong>Lepas grip.</strong> 3 set x 10 per sisi.</li>
+        <li><strong>Sprawl.</strong> 3 set x 8, cek postur.</li>
+      </ol>
+
+      <SafetyBox>
+        <ul>
+          <li>Latihan berpasangan hanya di matras, dengan pengawasan.</li>
+          <li>Pelajari ukemi sebelum latihan bantingan.</li>
+          <li>Jangan membanting di lantai keras.</li>
+          <li>Hentikan jika leher, lutut, atau punggung nyeri.</li>
+        </ul>
+      </SafetyBox>
+
+      <MarginNote>
+        <p>
+          Empat halaman teknik clinch sudah tersedia. Latih ukemi sebelum
+          bantingan, lalu masuk ke lepas cengkeraman, O-goshi, double leg,
+          dan sprawl.
+        </p>
+      </MarginNote>
+    </article>
+
+    <aside class="chapter-aside">
+      <section>
+        <h2>Di bab ini</h2>
+        <ul class="aside-list">
+          <li>
+            <span>01 · Judo / gulat · Tersedia</span>
+            <a href="/teknik/wrist-release">Lepas cengkeraman</a>
+          </li>
+          <li>
+            <span>02 · Judo · Tersedia</span>
+            <a href="/teknik/o-goshi">Bantingan pinggul / O-goshi</a>
+          </li>
+          <li>
+            <span>03 · Gulat · Tersedia</span>
+            <a href="/teknik/double-leg">Double leg takedown</a>
+          </li>
+          <li>
+            <span>04 · Gulat · Tersedia</span>
+            <a href="/teknik/sprawl">Sprawl</a>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Prasyarat</h2>
+        <p>Matras, partner, dan ruang yang cukup.</p>
+      </section>
+
+      <section>
+        <h2>Batas</h2>
+        <p>
+          Bab ini tidak mengajarkan bantingan ke permukaan keras. Bantingan
+          dipakai untuk kontrol dan keluar.
+        </p>
+      </section>
+    </aside>
+  </div>
+
+  <div class="wrap">
+    <nav class="page-nav" aria-label="Navigasi bab">
+      <a href="/panduan/02-berdiri">
+        <span class="label">Kembali</span>
+        <strong>Bab 02 · Berdiri</strong>
+      </a>
+      <a href="/panduan/04-tanah">
+        <span class="label">Lanjut</span>
+        <strong>Bab 04 · Tanah</strong>
+      </a>
+    </nav>
+  </div>
+</BaseLayout>

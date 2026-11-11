@@ -1,0 +1,183 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import MarginNote from "../../components/MarginNote.astro";
+
+const zoneByDiscipline = {
+  "krav-maga": "Jauh dan berdiri",
+  judo: "Clinch",
+  gulat: "Clinch",
+  bjj: "Tanah",
+} as const;
+
+export async function getStaticPaths() {
+  const entries = await getCollection(
+    "artikel",
+    ({ data }) => data.type === "aliran",
+  );
+
+  return entries.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const name = d.title.split(":")[0];
+const zone = d.discipline ? zoneByDiscipline[d.discipline] : "Lintas jarak";
+
+const techniques = await getCollection("teknik");
+const related = d.related.flatMap((slug) => {
+  const technique = techniques.find((item) => item.id === slug);
+  return technique ? [technique] : [];
+});
+---
+
+<BaseLayout title={d.title} description={d.dek}>
+  <header class="page-head">
+    <div class="wrap">
+      <div class="page-head__top">
+        <p class="label">Aliran · {zone}</p>
+        <p class="label">Ditinjau {d.updated}</p>
+      </div>
+      <h1>{name}</h1>
+      <p class="page-head__lede">{d.dek}</p>
+    </div>
+  </header>
+
+  <div class="wrap chapter-layout">
+    <article class="prose">
+      <p class="profile-lead">{d.lead}</p>
+      <Content />
+
+      {
+        related.length > 0 && (
+          <>
+            <h2>Teknik terkait</h2>
+            <ul class="profile-related">
+              {related.map((technique) => (
+                <li>
+                  <a href={`/teknik/${technique.id}`}>
+                    <strong>{technique.data.title}</strong>
+                    <span>{technique.data.summary}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+
+      <MarginNote>
+        <p>
+          Profil ini menjelaskan asal, asumsi, dan batas aliran. Bukan
+          kurikulum resmi dan bukan pengganti latihan dengan pengajar.
+        </p>
+      </MarginNote>
+    </article>
+
+    <aside class="chapter-aside">
+      <section>
+        <h2>Ringkas</h2>
+        <dl class="meta-list">
+          <div>
+            <dt>Aliran</dt>
+            <dd>{name}</dd>
+          </div>
+          <div>
+            <dt>Zona</dt>
+            <dd>{zone}</dd>
+          </div>
+          <div>
+            <dt>Ditinjau</dt>
+            <dd>{d.updated}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Sumber</h2>
+        <ul class="aside-list">
+          {
+            d.sources.map((source) => (
+              <li>
+                <span>{source.author ?? ""}</span>
+                <strong>{source.title}</strong>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section>
+        <h2>Batas</h2>
+        <p class="muted">
+          Latihan berpasangan membutuhkan matras dan pengawasan. Halaman ini
+          tidak mengajarkan disarm senjata atau menjamin hasil.
+        </p>
+      </section>
+    </aside>
+  </div>
+
+  <div class="wrap">
+    <nav class="page-nav" aria-label="Navigasi aliran">
+      <a href="/aliran">
+        <span class="label">Kembali</span>
+        <strong>Semua aliran</strong>
+      </a>
+      <a href="/teknik">
+        <span class="label">Lanjut</span>
+        <strong>Indeks teknik</strong>
+      </a>
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  .profile-lead {
+    max-width: 54ch;
+    margin-bottom: 1.6em;
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+
+  .profile-related {
+    margin: 0 0 2em;
+    padding: 0;
+    border-top: 1px solid var(--ink);
+    list-style: none;
+  }
+
+  .profile-related li {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .profile-related a {
+    display: block;
+    padding: 12px 0;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .profile-related a:hover {
+    color: var(--accent-dark);
+  }
+
+  .profile-related strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  .profile-related span {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+  }
+</style>

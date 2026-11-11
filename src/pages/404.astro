@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Halaman tidak ditemukan"
+  description="Halaman yang dicari tidak ada di TAHAN."
+  noindex
+>
+  <section class="notfound">
+    <div class="wrap notfound__inner">
+      <p class="notfound__num" aria-hidden="true">404</p>
+      <h1>Halaman tidak ditemukan.</h1>
+      <p class="notfound__text">
+        Alamat ini tidak ada, sudah dipindahkan, atau belum ditulis. Kembali ke
+        panduan untuk melihat halaman yang tersedia.
+      </p>
+      <div class="notfound__actions">
+        <a class="button" href="/panduan">Buka panduan</a>
+        <a class="button button--ghost" href="/">Beranda</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

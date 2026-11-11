@@ -1,0 +1,223 @@
+---
+import Figure from "../Figure.astro";
+
+interface Props {
+  frame: 1 | 2 | 3;
+  number: string;
+  alt: string;
+  caption: string;
+}
+
+const { frame, number, alt, caption } = Astro.props;
+const titleId = `mountescape-figure-${frame}`;
+---
+
+<Figure number={number} caption={caption}>
+  {
+    frame === 1 && (
+      <svg
+        class="diagram"
+        viewBox="0 0 720 400"
+        role="img"
+        aria-labelledby={titleId}
+      >
+        <title id={titleId}>{alt}</title>
+        <text x="40" y="28" class="diagram__note">
+          01 / MOUNT
+        </text>
+        <text x="680" y="28" class="diagram__note" text-anchor="end">
+          TAMPAK SAMPING
+        </text>
+        <line x1="40" y1="44" x2="680" y2="44" class="diagram__tick" />
+        <line x1="40" y1="330" x2="680" y2="330" class="diagram__ground" />
+
+        <circle class="diagram__main" cx="260" cy="292" r="24" />
+        <rect
+          class="diagram__main"
+          x="284"
+          y="264"
+          width="180"
+          height="56"
+          rx="28"
+        />
+        <path class="diagram__main-soft" d="M300 278 L330 240 L360 232" />
+        <path class="diagram__main-limb" d="M464 292 L500 300 L530 304" />
+        <path class="diagram__main-limb" d="M284 292 L240 318 L200 326" />
+
+        <circle class="diagram__opp" cx="360" cy="232" r="24" />
+        <rect
+          class="diagram__opp"
+          x="316"
+          y="204"
+          width="90"
+          height="86"
+          rx="28"
+        />
+        <path class="diagram__opp-soft" d="M340 224 L290 244 L250 256" />
+        <path class="diagram__opp-limb" d="M352 242 L300 262 L260 276" />
+        <path class="diagram__opp-soft" d="M400 224 L450 244 L490 256" />
+        <path class="diagram__opp-limb" d="M388 242 L440 262 L480 276" />
+
+        <text x="260" y="372" class="diagram__label" text-anchor="middle">
+          ANDA
+        </text>
+        <text x="360" y="164" class="diagram__label" text-anchor="middle">
+          LAWAN
+        </text>
+        <text x="40" y="352" class="diagram__note">
+          MATRAS
+        </text>
+        <text x="360" y="360" class="diagram__label diagram__label--accent">
+          MOUNT
+        </text>
+      </svg>
+    )
+  }
+
+  {
+    frame === 2 && (
+      <svg
+        class="diagram"
+        viewBox="0 0 720 400"
+        role="img"
+        aria-labelledby={titleId}
+      >
+        <title id={titleId}>{alt}</title>
+        <text x="40" y="28" class="diagram__note">
+          02 / FRAME DAN BRIDGE
+        </text>
+        <text x="680" y="28" class="diagram__note" text-anchor="end">
+          TAMPAK SAMPING
+        </text>
+        <line x1="40" y1="44" x2="680" y2="44" class="diagram__tick" />
+        <line x1="40" y1="330" x2="680" y2="330" class="diagram__ground" />
+
+        <g transform="rotate(-12 300 278)">
+          <rect
+            class="diagram__main"
+            x="284"
+            y="250"
+            width="180"
+            height="56"
+            rx="28"
+          />
+        </g>
+        <circle class="diagram__main" cx="250" cy="286" r="24" />
+        <path class="diagram__main-soft" d="M290 266 L320 228 L350 220" />
+        <path class="diagram__main-limb" d="M464 266 L500 278 L530 284" />
+        <path class="diagram__main-limb" d="M284 288 L240 318 L200 326" />
+
+        <g transform="rotate(12 360 230)">
+          <circle class="diagram__opp" cx="360" cy="230" r="24" />
+          <rect
+            class="diagram__opp"
+            x="316"
+            y="202"
+            width="90"
+            height="86"
+            rx="28"
+          />
+          <path class="diagram__opp-soft" d="M340 222 L290 242 L250 254" />
+          <path class="diagram__opp-limb" d="M352 240 L300 260 L260 274" />
+          <path class="diagram__opp-soft" d="M400 222 L450 242 L490 254" />
+          <path class="diagram__opp-limb" d="M388 240 L440 260 L480 274" />
+        </g>
+
+        <path
+          class="diagram__arrow"
+          d="M300 232 C330 196 300 176 250 188"
+          marker-end={`url(#mountescape-arrow-${frame})`}
+        />
+        <defs>
+          <marker
+            id={`mountescape-arrow-${frame}`}
+            viewBox="0 0 6 6"
+            refX="5"
+            refY="3"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto"
+            markerUnits="strokeWidth"
+          >
+            <path class="diagram__arrow-head" d="M0 0 L6 3 L0 6 Z" />
+          </marker>
+        </defs>
+
+        <text x="250" y="372" class="diagram__label" text-anchor="middle">
+          ANDA
+        </text>
+        <text x="360" y="150" class="diagram__label" text-anchor="middle">
+          LAWAN
+        </text>
+        <text x="40" y="352" class="diagram__note">
+          MATRAS
+        </text>
+        <text x="270" y="166" class="diagram__label diagram__label--accent">
+          ANGKAT
+        </text>
+      </svg>
+    )
+  }
+
+  {
+    frame === 3 && (
+      <svg
+        class="diagram"
+        viewBox="0 0 720 400"
+        role="img"
+        aria-labelledby={titleId}
+      >
+        <title id={titleId}>{alt}</title>
+        <text x="40" y="28" class="diagram__note">
+          03 / PULIHKAN GUARD
+        </text>
+        <text x="680" y="28" class="diagram__note" text-anchor="end">
+          TAMPAK SAMPING
+        </text>
+        <line x1="40" y1="44" x2="680" y2="44" class="diagram__tick" />
+        <line x1="40" y1="330" x2="680" y2="330" class="diagram__ground" />
+
+        <circle class="diagram__main" cx="250" cy="286" r="24" />
+        <rect
+          class="diagram__main"
+          x="274"
+          y="258"
+          width="160"
+          height="56"
+          rx="28"
+        />
+        <path class="diagram__main-soft" d="M270 272 L300 234 L330 226" />
+        <path class="diagram__main-limb" d="M414 286 L470 250 L520 230" />
+        <path class="diagram__main-limb" d="M254 286 L200 316 L160 324" />
+        <path class="diagram__main-limb" d="M264 300 L300 326 L340 330" />
+
+        <circle class="diagram__opp" cx="470" cy="220" r="24" />
+        <rect
+          class="diagram__opp"
+          x="426"
+          y="192"
+          width="90"
+          height="86"
+          rx="28"
+        />
+        <path class="diagram__opp-soft" d="M450 212 L400 232 L360 244" />
+        <path class="diagram__opp-limb" d="M462 230 L410 250 L370 264" />
+        <path class="diagram__opp-soft" d="M510 212 L560 232 L600 244" />
+        <path class="diagram__opp-limb" d="M498 230 L550 250 L590 264" />
+
+        <text x="250" y="372" class="diagram__label" text-anchor="middle">
+          ANDA
+        </text>
+        <text x="470" y="150" class="diagram__label" text-anchor="middle">
+          LAWAN
+        </text>
+        <text x="40" y="352" class="diagram__note">
+          MATRAS
+        </text>
+        <text x="360" y="170" class="diagram__label diagram__label--accent">
+          PULIHKAN GUARD
+        </text>
+      </svg>
+    )
+  }
+</Figure>

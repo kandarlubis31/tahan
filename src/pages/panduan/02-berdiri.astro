@@ -1,0 +1,137 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RangeScale from "../../components/RangeScale.astro";
+import SafetyBox from "../../components/SafetyBox.astro";
+import MarginNote from "../../components/MarginNote.astro";
+---
+
+<BaseLayout
+  title="Bab 02 · Berdiri"
+  description="Palm strike, tendangan depan ke selangkangan, tangkisan 360. Keterampilan untuk kontak pertama."
+>
+  <header class="chapter-hero">
+    <div class="wrap">
+      <div class="chapter-hero__top">
+        <p class="label">Bab 02 · Berdiri</p>
+        <p class="label">3 teknik</p>
+      </div>
+
+      <div class="chapter-hero__main">
+        <p class="chapter-hero__number" aria-hidden="true">02</p>
+        <div>
+          <h1>Berdiri</h1>
+          <p class="chapter-hero__deck">
+            Kontak pertama. Palm strike, tendangan depan ke selangkangan,
+            tangkisan 360. Keterampilan untuk berdiri, bukan untuk duel
+            panjang.
+          </p>
+        </div>
+      </div>
+
+      <div class="chapter-hero__foot">
+        <p class="label">Jarak kedua</p>
+        <p>
+          Satu langkah dari ancaman. Di sini keputusan: hentikan, lalu
+          keluar.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <section class="range-section">
+    <div class="wrap">
+      <RangeScale active="berdiri" />
+    </div>
+  </section>
+
+  <div class="wrap chapter-layout">
+    <article class="prose">
+      <p>
+        Berdiri adalah jarak pukul. Di sini, tujuan bukan memenangkan
+        pertarungan, melainkan menghentikan ancaman cukup lama untuk keluar.
+        Semua teknik di bab ini dipakai sekali, lalu lari.
+      </p>
+
+      <h2>Apa yang berubah di berdiri</h2>
+      <p>
+        Jarak menutup. Kaki masih bebas, tetapi tangan lawan sudah bisa
+        menjangkau. Keputusan harus cepat: hentikan, lalu keluar. Jangan
+        masuk ke pertukaran pukulan.
+      </p>
+
+      <h2>Tiga teknik</h2>
+      <p>
+        Palm strike untuk jarak dekat. Tendangan depan ke selangkangan
+        untuk menciptakan jarak. Tangkisan 360 untuk menangkis serangan
+        lengan. Ketiganya dipakai untuk keluar, bukan untuk duel.
+      </p>
+
+      <h2>Latihan dasar</h2>
+      <ol>
+        <li><strong>Palm strike bayangan.</strong> 3 set x 20, pelan.</li>
+        <li><strong>Tendangan depan.</strong> 3 set x 10 per kaki.</li>
+        <li><strong>Tangkisan 360.</strong> 3 set x 15 per sisi.</li>
+      </ol>
+
+      <SafetyBox>
+        <ul>
+          <li>Latihan berpasangan hanya di matras, dengan pengawasan.</li>
+          <li>Jangan latih pukulan ke wajah tanpa pelindung.</li>
+          <li>Hentikan jika leher, lutut, atau punggung nyeri.</li>
+        </ul>
+      </SafetyBox>
+
+      <MarginNote>
+        <p>
+          Tiga halaman teknik di bab ini sudah tersedia. Mulai dari palm
+          strike, lalu tendangan depan dan tangkisan 360.
+        </p>
+      </MarginNote>
+    </article>
+
+    <aside class="chapter-aside">
+      <section>
+        <h2>Di bab ini</h2>
+        <ul class="aside-list">
+          <li>
+            <span>01 · Krav Maga · Tersedia</span>
+            <a href="/teknik/palm-strike">Palm strike</a>
+          </li>
+          <li>
+            <span>02 · Krav Maga · Tersedia</span>
+            <a href="/teknik/front-kick">Tendangan depan ke selangkangan</a>
+          </li>
+          <li>
+            <span>03 · Krav Maga · Tersedia</span>
+            <a href="/teknik/tangkisan-360">Tangkisan 360</a>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Prasyarat</h2>
+        <p>Ruang yang cukup. Tidak perlu matras.</p>
+      </section>
+
+      <section>
+        <h2>Batas</h2>
+        <p>
+          Bab ini tidak mengajarkan duel panjang. Tujuan selalu keluar.
+        </p>
+      </section>
+    </aside>
+  </div>
+
+  <div class="wrap">
+    <nav class="page-nav" aria-label="Navigasi bab">
+      <a href="/panduan/01-jauh">
+        <span class="label">Kembali</span>
+        <strong>Bab 01 · Jauh</strong>
+      </a>
+      <a href="/panduan/03-clinch">
+        <span class="label">Lanjut</span>
+        <strong>Bab 03 · Clinch</strong>
+      </a>
+    </nav>
+  </div>
+</BaseLayout>

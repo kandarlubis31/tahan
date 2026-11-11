@@ -1,0 +1,124 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RangeScale from "../../components/RangeScale.astro";
+import SafetyBox from "../../components/SafetyBox.astro";
+import MarginNote from "../../components/MarginNote.astro";
+
+const entries = (
+  await getCollection("artikel", ({ data }) => data.type === "jarak")
+).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+
+const entry = entries[0];
+
+if (!entry) {
+  throw new Error("Artikel bab 01 belum tersedia.");
+}
+
+const { Content } = await render(entry);
+const d = entry.data;
+---
+
+<BaseLayout title="Bab 01 · Jauh" description={d.dek}>
+  <header class="chapter-hero">
+    <div class="wrap">
+      <div class="chapter-hero__top">
+        <p class="label">Bab 01 · Jauh</p>
+        <p class="label">{entries.length} artikel</p>
+      </div>
+
+      <div class="chapter-hero__main">
+        <p class="chapter-hero__number" aria-hidden="true">01</p>
+        <div>
+          <h1>Jauh</h1>
+          <p class="chapter-hero__deck">
+            Sebelum ada kontak: sikap, pagar tangan, dan arah lari. Jarak
+            lebih dari dua meter adalah ruang untuk berpikir.
+          </p>
+        </div>
+      </div>
+
+      <div class="chapter-hero__foot">
+        <p class="label">Jarak pertama</p>
+        <p>
+          Tempat lawan belum menjangkau, dan tempat keputusan keluar masih
+          mungkin.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <section class="range-section">
+    <div class="wrap">
+      <RangeScale active="jauh" />
+    </div>
+  </section>
+
+  <div class="wrap chapter-layout">
+    <article class="prose">
+      <p class="article-meta label">Artikel 01 · Umum</p>
+      <h2 id="artikel">{d.title}</h2>
+      <Content />
+
+      <SafetyBox>
+        <ul>
+          <li>Latihan berpasangan hanya di matras, dengan pengawasan.</li>
+          <li>Hentikan jika leher, lutut, atau punggung nyeri.</li>
+          <li>Kalau ada ancaman nyata, cari bantuan, bukan berlatih.</li>
+        </ul>
+      </SafetyBox>
+
+      <MarginNote>
+        <p>
+          Bab ini fokus pada posisi, jarak, dan keputusan. Gerakan kuncian
+          tidak dibahas di sini.
+        </p>
+      </MarginNote>
+    </article>
+
+    <aside class="chapter-aside">
+      <section>
+        <h2>Di bab ini</h2>
+        <ul class="aside-list">
+          <li>
+            <span>01 · Umum</span>
+            <a href="#artikel">{d.title}</a>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Prasyarat</h2>
+        <p>Ruang yang cukup untuk langkah mundur. Tidak perlu matras.</p>
+      </section>
+
+      <section>
+        <h2>Batas</h2>
+        <p>
+          Bab ini tidak mengajarkan disarm senjata. Jika ada senjata, lari
+          dan cari bantuan.
+        </p>
+      </section>
+    </aside>
+  </div>
+
+  <div class="wrap">
+    <nav class="page-nav" aria-label="Navigasi bab">
+      <a href="/panduan/00-prinsip">
+        <span class="label">Kembali</span>
+        <strong>Bab 00 · Prinsip</strong>
+      </a>
+      <a href="/panduan/02-berdiri">
+        <span class="label">Lanjut</span>
+        <strong>Bab 02 · Berdiri</strong>
+      </a>
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  .article-meta {
+    margin-bottom: 10px;
+    color: var(--accent-dark);
+  }
+</style>

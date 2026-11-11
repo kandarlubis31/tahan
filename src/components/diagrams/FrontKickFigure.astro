@@ -1,0 +1,221 @@
+---
+import Figure from "../Figure.astro";
+
+interface Props {
+  frame: 1 | 2 | 3;
+  number: string;
+  alt: string;
+  caption: string;
+}
+
+const { frame, number, alt, caption } = Astro.props;
+const titleId = `frontkick-figure-${frame}`;
+---
+
+<Figure number={number} caption={caption}>
+  {
+    frame === 1 && (
+      <svg
+        class="diagram"
+        viewBox="0 0 720 400"
+        role="img"
+        aria-labelledby={titleId}
+      >
+        <title id={titleId}>{alt}</title>
+        <text x="40" y="28" class="diagram__note">
+          01 / SIKAP SIAP
+        </text>
+        <text x="680" y="28" class="diagram__note" text-anchor="end">
+          TAMPAK SAMPING
+        </text>
+        <line x1="40" y1="44" x2="680" y2="44" class="diagram__tick" />
+        <line x1="40" y1="330" x2="680" y2="330" class="diagram__ground" />
+
+        <circle class="diagram__main" cx="280" cy="190" r="24" />
+        <rect
+          class="diagram__main"
+          x="256"
+          y="214"
+          width="48"
+          height="64"
+          rx="10"
+        />
+        <path class="diagram__main-limb" d="M256 230 L210 250 L170 260" />
+        <path class="diagram__main-limb" d="M304 230 L350 250 L390 260" />
+        <path class="diagram__main-limb" d="M268 278 L250 310 L230 330" />
+        <path class="diagram__main-limb" d="M292 278 L310 310 L330 330" />
+
+        <circle class="diagram__opp" cx="470" cy="210" r="24" />
+        <rect
+          class="diagram__opp"
+          x="446"
+          y="234"
+          width="48"
+          height="64"
+          rx="10"
+        />
+        <path class="diagram__opp-limb" d="M446 250 L400 270 L360 280" />
+        <path class="diagram__opp-limb" d="M494 250 L540 270 L580 280" />
+        <path class="diagram__opp-limb" d="M458 298 L440 320 L420 330" />
+        <path class="diagram__opp-limb" d="M482 298 L500 320 L520 330" />
+
+        <text x="280" y="372" class="diagram__label" text-anchor="middle">
+          ANDA
+        </text>
+        <text x="470" y="372" class="diagram__label" text-anchor="middle">
+          LAWAN
+        </text>
+        <text x="40" y="352" class="diagram__note">
+          MATRAS
+        </text>
+        <text x="375" y="160" class="diagram__label diagram__label--accent">
+          JARAK 1 LANGKAH
+        </text>
+      </svg>
+    )
+  }
+
+  {
+    frame === 2 && (
+      <svg
+        class="diagram"
+        viewBox="0 0 720 400"
+        role="img"
+        aria-labelledby={titleId}
+      >
+        <title id={titleId}>{alt}</title>
+        <text x="40" y="28" class="diagram__note">
+          02 / TENDANGAN DEPAN
+        </text>
+        <text x="680" y="28" class="diagram__note" text-anchor="end">
+          TAMPAK SAMPING
+        </text>
+        <line x1="40" y1="44" x2="680" y2="44" class="diagram__tick" />
+        <line x1="40" y1="330" x2="680" y2="330" class="diagram__ground" />
+
+        <circle class="diagram__main" cx="300" cy="190" r="24" />
+        <rect
+          class="diagram__main"
+          x="276"
+          y="214"
+          width="48"
+          height="64"
+          rx="10"
+        />
+        <path class="diagram__main-limb" d="M276 230 L230 250 L190 260" />
+        <path class="diagram__main-limb" d="M324 230 L370 250 L410 260" />
+        <path class="diagram__main-limb" d="M288 278 L270 310 L250 330" />
+        <path class="diagram__main-limb" d="M312 278 L360 250 L420 210" />
+
+        <circle class="diagram__opp" cx="470" cy="210" r="24" />
+        <rect
+          class="diagram__opp"
+          x="446"
+          y="234"
+          width="48"
+          height="64"
+          rx="10"
+        />
+        <path class="diagram__opp-limb" d="M446 250 L400 270 L360 280" />
+        <path class="diagram__opp-limb" d="M494 250 L540 270 L580 280" />
+        <path class="diagram__opp-limb" d="M458 298 L440 320 L420 330" />
+        <path class="diagram__opp-limb" d="M482 298 L500 320 L520 330" />
+
+        <path
+          class="diagram__arrow"
+          d="M312 250 C360 220 400 200 440 210"
+          marker-end={`url(#frontkick-arrow-${frame})`}
+        />
+        <defs>
+          <marker
+            id={`frontkick-arrow-${frame}`}
+            viewBox="0 0 6 6"
+            refX="5"
+            refY="3"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto"
+            markerUnits="strokeWidth"
+          >
+            <path class="diagram__arrow-head" d="M0 0 L6 3 L0 6 Z" />
+          </marker>
+        </defs>
+
+        <text x="300" y="372" class="diagram__label" text-anchor="middle">
+          ANDA
+        </text>
+        <text x="470" y="372" class="diagram__label" text-anchor="middle">
+          LAWAN
+        </text>
+        <text x="40" y="352" class="diagram__note">
+          MATRAS
+        </text>
+        <text x="380" y="160" class="diagram__label diagram__label--accent">
+          TENDANG
+        </text>
+      </svg>
+    )
+  }
+
+  {
+    frame === 3 && (
+      <svg
+        class="diagram"
+        viewBox="0 0 720 400"
+        role="img"
+        aria-labelledby={titleId}
+      >
+        <title id={titleId}>{alt}</title>
+        <text x="40" y="28" class="diagram__note">
+          03 / MENJAUH
+        </text>
+        <text x="680" y="28" class="diagram__note" text-anchor="end">
+          TAMPAK SAMPING
+        </text>
+        <line x1="40" y1="44" x2="680" y2="44" class="diagram__tick" />
+        <line x1="40" y1="330" x2="680" y2="330" class="diagram__ground" />
+
+        <circle class="diagram__main" cx="230" cy="200" r="24" />
+        <rect
+          class="diagram__main"
+          x="206"
+          y="224"
+          width="48"
+          height="64"
+          rx="10"
+        />
+        <path class="diagram__main-limb" d="M206 240 L160 260 L120 270" />
+        <path class="diagram__main-limb" d="M254 240 L300 260 L340 270" />
+        <path class="diagram__main-limb" d="M218 288 L200 320 L180 330" />
+        <path class="diagram__main-limb" d="M242 288 L260 320 L280 330" />
+
+        <circle class="diagram__opp" cx="520" cy="210" r="24" />
+        <rect
+          class="diagram__opp"
+          x="496"
+          y="234"
+          width="48"
+          height="64"
+          rx="10"
+        />
+        <path class="diagram__opp-limb" d="M496 250 L450 270 L410 280" />
+        <path class="diagram__opp-limb" d="M544 250 L590 270 L630 280" />
+        <path class="diagram__opp-limb" d="M508 298 L490 320 L470 330" />
+        <path class="diagram__opp-limb" d="M532 298 L550 320 L570 330" />
+
+        <text x="230" y="372" class="diagram__label" text-anchor="middle">
+          ANDA
+        </text>
+        <text x="520" y="372" class="diagram__label" text-anchor="middle">
+          LAWAN
+        </text>
+        <text x="40" y="352" class="diagram__note">
+          MATRAS
+        </text>
+        <text x="375" y="240" class="diagram__label diagram__label--accent">
+          MENJAUH
+        </text>
+      </svg>
+    )
+  }
+</Figure>

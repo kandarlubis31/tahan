@@ -1,0 +1,96 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("artikel", ({ data }) => data.type === "catatan");
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+
+<BaseLayout title={d.title} description={d.dek}>
+  <header class="page-head">
+    <div class="wrap">
+      <div class="page-head__top">
+        <p class="label">Catatan</p>
+        <p class="label">Ditinjau {d.updated}</p>
+      </div>
+      <h1>{d.title}</h1>
+      <p class="page-head__deck">{d.dek}</p>
+    </div>
+  </header>
+
+  <div class="wrap chapter-layout">
+    <article class="prose">
+      <p class="catatan-lead">{d.lead}</p>
+      <Content />
+    </article>
+
+    <aside class="chapter-aside">
+      <section>
+        <h2>Ringkas</h2>
+        <dl class="meta-list">
+          <div>
+            <dt>Jenis</dt>
+            <dd>Catatan</dd>
+          </div>
+          <div>
+            <dt>Ditinjau</dt>
+            <dd>{d.updated}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Sumber</h2>
+        <ul class="aside-list">
+          {
+            d.sources.map((source) => (
+              <li>
+                <span>{source.author ?? ""}</span>
+                <strong>{source.title}</strong>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section>
+        <h2>Batas</h2>
+        <p class="muted">
+          Catatan ini bukan tutorial teknik. Latihan berpasangan tetap
+          membutuhkan matras dan pengawasan.
+        </p>
+      </section>
+    </aside>
+  </div>
+
+  <div class="wrap">
+    <nav class="page-nav" aria-label="Navigasi catatan">
+      <a href="/panduan">
+        <span class="label">Kembali</span>
+        <strong>Panduan</strong>
+      </a>
+      <a href="/teknik">
+        <span class="label">Lanjut</span>
+        <strong>Indeks teknik</strong>
+      </a>
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  .catatan-lead {
+    max-width: 54ch;
+    margin-bottom: 1.6em;
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+</style>

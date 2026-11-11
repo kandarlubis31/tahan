@@ -1,0 +1,170 @@
+---
+import Figure from "../Figure.astro";
+
+interface Props {
+  frame: 1 | 2 | 3;
+  number: string;
+  alt: string;
+  caption: string;
+}
+
+const { frame, number, alt, caption } = Astro.props;
+const titleId = `standup-figure-${frame}`;
+---
+
+<Figure number={number} caption={caption}>
+  {
+    frame === 1 && (
+      <svg
+        class="diagram"
+        viewBox="0 0 720 400"
+        role="img"
+        aria-labelledby={titleId}
+      >
+        <title id={titleId}>{alt}</title>
+        <text x="40" y="28" class="diagram__note">
+          01 / DUDUK
+        </text>
+        <text x="680" y="28" class="diagram__note" text-anchor="end">
+          TAMPAK SAMPING
+        </text>
+        <line x1="40" y1="44" x2="680" y2="44" class="diagram__tick" />
+        <line x1="40" y1="330" x2="680" y2="330" class="diagram__ground" />
+
+        <circle class="diagram__main" cx="250" cy="286" r="24" />
+        <rect
+          class="diagram__main"
+          x="274"
+          y="258"
+          width="150"
+          height="56"
+          rx="28"
+        />
+        <path class="diagram__main-soft" d="M290 272 L320 234 L350 226" />
+        <path class="diagram__main-limb" d="M424 286 L470 300 L510 306" />
+        <path class="diagram__main-limb" d="M274 286 L220 316 L180 324" />
+        <path class="diagram__main-limb" d="M284 300 L320 326 L360 330" />
+
+        <text x="250" y="372" class="diagram__label" text-anchor="middle">
+          ANDA
+        </text>
+        <text x="40" y="352" class="diagram__note">
+          MATRAS
+        </text>
+        <text x="360" y="170" class="diagram__label diagram__label--accent">
+          DUDUK
+        </text>
+      </svg>
+    )
+  }
+
+  {
+    frame === 2 && (
+      <svg
+        class="diagram"
+        viewBox="0 0 720 400"
+        role="img"
+        aria-labelledby={titleId}
+      >
+        <title id={titleId}>{alt}</title>
+        <text x="40" y="28" class="diagram__note">
+          02 / TANGAN DAN KAKI
+        </text>
+        <text x="680" y="28" class="diagram__note" text-anchor="end">
+          TAMPAK SAMPING
+        </text>
+        <line x1="40" y1="44" x2="680" y2="44" class="diagram__tick" />
+        <line x1="40" y1="330" x2="680" y2="330" class="diagram__ground" />
+
+        <circle class="diagram__main" cx="230" cy="250" r="24" />
+        <rect
+          class="diagram__main"
+          x="254"
+          y="222"
+          width="150"
+          height="56"
+          rx="28"
+        />
+        <path class="diagram__main-soft" d="M270 236 L300 198 L330 190" />
+        <path class="diagram__main-limb" d="M404 250 L450 264 L490 270" />
+        <path class="diagram__main-limb" d="M254 250 L200 290 L160 326" />
+        <path class="diagram__main-limb" d="M264 264 L300 300 L340 326" />
+
+        <path
+          class="diagram__arrow"
+          d="M300 170 C330 134 300 114 250 126"
+          marker-end={`url(#standup-arrow-${frame})`}
+        />
+        <defs>
+          <marker
+            id={`standup-arrow-${frame}`}
+            viewBox="0 0 6 6"
+            refX="5"
+            refY="3"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto"
+            markerUnits="strokeWidth"
+          >
+            <path class="diagram__arrow-head" d="M0 0 L6 3 L0 6 Z" />
+          </marker>
+        </defs>
+
+        <text x="230" y="372" class="diagram__label" text-anchor="middle">
+          ANDA
+        </text>
+        <text x="40" y="352" class="diagram__note">
+          MATRAS
+        </text>
+        <text x="330" y="108" class="diagram__label diagram__label--accent">
+          DORONG
+        </text>
+      </svg>
+    )
+  }
+
+  {
+    frame === 3 && (
+      <svg
+        class="diagram"
+        viewBox="0 0 720 400"
+        role="img"
+        aria-labelledby={titleId}
+      >
+        <title id={titleId}>{alt}</title>
+        <text x="40" y="28" class="diagram__note">
+          03 / BERDIRI
+        </text>
+        <text x="680" y="28" class="diagram__note" text-anchor="end">
+          TAMPAK SAMPING
+        </text>
+        <line x1="40" y1="44" x2="680" y2="44" class="diagram__tick" />
+        <line x1="40" y1="330" x2="680" y2="330" class="diagram__ground" />
+
+        <circle class="diagram__main" cx="360" cy="170" r="24" />
+        <rect
+          class="diagram__main"
+          x="336"
+          y="194"
+          width="48"
+          height="100"
+          rx="24"
+        />
+        <path class="diagram__main-limb" d="M360 294 L360 324" />
+        <path class="diagram__main-limb" d="M360 294 L330 324" />
+        <path class="diagram__main-soft" d="M336 220 L300 238 L270 246" />
+        <path class="diagram__main-soft" d="M384 220 L420 238 L450 246" />
+
+        <text x="360" y="372" class="diagram__label" text-anchor="middle">
+          ANDA
+        </text>
+        <text x="40" y="352" class="diagram__note">
+          MATRAS
+        </text>
+        <text x="470" y="170" class="diagram__label diagram__label--accent">
+          BERDIRI
+        </text>
+      </svg>
+    )
+  }
+</Figure>

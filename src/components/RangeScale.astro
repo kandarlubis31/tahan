@@ -1,0 +1,82 @@
+---
+interface Item {
+  id: string;
+  num: string;
+  name: string;
+  distance: string;
+  text: string;
+  href?: string;
+}
+
+interface Props {
+  active?: "jauh" | "berdiri" | "clinch" | "tanah";
+}
+
+const { active } = Astro.props;
+
+const items: Item[] = [
+  {
+    id: "jauh",
+    num: "01",
+    name: "Jauh",
+    distance: "Lebih dari dua meter",
+    text: "Sebelum ada kontak: sikap, pagar tangan, dan arah lari.",
+    href: "/panduan/01-jauh",
+  },
+  {
+    id: "berdiri",
+    num: "02",
+    name: "Berdiri",
+    distance: "Satu langkah",
+    text: "Kontak pertama. Pukulan, tangkisan, dan cara tidak jatuh.",
+    href: "/panduan/02-berdiri",
+  },
+  {
+    id: "clinch",
+    num: "03",
+    name: "Clinch",
+    distance: "Menempel",
+    text: "Grip, bantingan, dan cara melepas diri sebelum jatuh.",
+    href: "/panduan/03-clinch",
+  },
+  {
+    id: "tanah",
+    num: "04",
+    name: "Tanah",
+    distance: "Di lantai",
+    text: "Punggung di matras. Posisi, geser pinggul, dan berdiri kembali.",
+    href: "/panduan/04-tanah",
+  },
+];
+---
+
+<ol class="range-scale" aria-label="Empat jarak">
+  {
+    items.map((item) => (
+      <li
+        class:list={["range-scale__item", { "is-active": active === item.id }]}
+      >
+        {item.href ? (
+          <a class="range-scale__link" href={item.href}>
+            <span class="range-scale__num">{item.num}</span>
+            <span class="range-scale__name">{item.name}</span>
+            <span class="range-scale__distance">{item.distance}</span>
+            <span class="range-scale__text">{item.text}</span>
+            {active !== item.id && (
+              <span class="range-scale__open">
+                Buka bab <span aria-hidden="true">→</span>
+              </span>
+            )}
+          </a>
+        ) : (
+          <div>
+            <span class="range-scale__num">{item.num}</span>
+            <span class="range-scale__name">{item.name}</span>
+            <span class="range-scale__distance">{item.distance}</span>
+            <span class="range-scale__text">{item.text}</span>
+          </div>
+        )}
+      </li>
+    ))
+  }
+</ol>

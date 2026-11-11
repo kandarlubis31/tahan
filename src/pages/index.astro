@@ -1,0 +1,278 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import RangeScale from "../components/RangeScale.astro";
+
+const chapters = [
+  {
+    num: "00",
+    title: "Prinsip",
+    desc: "Hindari dulu. Jarak adalah keputusan. Posisi sebelum kuncian. Tap bukan kalah.",
+    meta: "4 catatan",
+    href: "/panduan/00-prinsip",
+    available: true,
+  },
+  {
+    num: "01",
+    title: "Jauh",
+    desc: "Sikap siap dan pagar tangan. Membaca jarak sebelum kontak terjadi.",
+    meta: "1 artikel",
+    href: "/panduan/01-jauh",
+    available: true,
+  },
+  {
+    num: "02",
+    title: "Berdiri",
+    desc: "Palm strike, tendangan depan, tangkisan 360. Kontak pertama dan cara tidak jatuh.",
+    meta: "3 teknik",
+    href: "/panduan/02-berdiri",
+    available: true,
+  },
+  {
+    num: "03",
+    title: "Clinch",
+    desc: "Lepas cengkeraman, O-goshi, double leg, sprawl. Saat tubuh sudah menempel.",
+    meta: "4 teknik",
+    href: "/panduan/03-clinch",
+    available: true,
+  },
+  {
+    num: "04",
+    title: "Tanah",
+    desc: "Shrimp, bridge, technical stand-up, bertahan di guard, lepas dari mount.",
+    meta: "5 teknik",
+    href: "/panduan/04-tanah",
+    available: true,
+  },
+];
+
+const disciplines = [
+  {
+    tag: "BJJ",
+    name: "Bertarung dari bawah",
+    text: "Guard, sapuan, dan kuncian yang perlu dikenali sebelum dipakai.",
+  },
+  {
+    tag: "Judo",
+    name: "Melempar tanpa ikut jatuh",
+    text: "Grip, keseimbangan, dan ukemi sebagai prasyarat, bukan pemanis.",
+  },
+  {
+    tag: "Gulat",
+    name: "Kontrol tanpa kain",
+    text: "Takedown, sprawl, dan tekanan dari atas. Sedikit ruang untuk bernapas.",
+  },
+  {
+    tag: "Krav Maga",
+    name: "Dari lapangan ke layar",
+    text: "Yang berguna: jarak, kejutan, dan lari. Bukan koreografi.",
+  },
+];
+---
+
+<BaseLayout
+  title="Panduan bertahan diri"
+  description="Panduan bertahan diri dari BJJ, Judo, gulat, dan Krav Maga. Disusun menurut jarak: jauh, berdiri, clinch, tanah."
+>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero__top">
+        <p class="label">Panduan bertahan diri</p>
+        <p class="label">Edisi 1.0.0 · 2026</p>
+      </div>
+
+      <h1 class="hero__title">
+        <span>Bela diri</span>
+        <span>bukan soal menang.</span>
+        <span class="accent">Soal pulang utuh.</span>
+      </h1>
+
+      <div class="hero__bottom">
+        <div>
+          <p class="hero__lede">
+            Empat jarak, empat aliran, satu urutan: hindari, lepas, lari.
+            Panduan ini disusun untuk dibaca sebelum dibutuhkan.
+          </p>
+          <div class="hero__actions">
+            <a class="button" href="/panduan/04-tanah">Mulai dari tanah</a>
+            <a class="button button--ghost" href="/tentang">Baca metode</a>
+          </div>
+        </div>
+        <aside class="hero__aside">
+          <p class="label">BJJ · Judo · Gulat · Krav Maga</p>
+          <p>
+            Yang dilatih bukan keberanian. Jarak, posisi, dan keputusan yang
+            dibuat sebelum tubuh menanggung akibatnya.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="range-section">
+    <div class="wrap">
+      <div class="range-section__head">
+        <p class="label">Peta jarak</p>
+        <p>
+          Perkelahian berubah menurut jarak. Teknik yang bekerja di satu jarak
+          bisa berbahaya di jarak lain. Empat zona ini menjadi urutan panduan.
+        </p>
+      </div>
+      <RangeScale />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="label">Panduan</p>
+          <h2>Urutan yang diikuti, bukan daftar jurus.</h2>
+        </div>
+        <p>
+          Setiap bab menempati satu jarak. Teknik hanya masuk kalau menjawab
+          masalah di jarak itu, bukan karena terlihat bagus di layar.
+        </p>
+      </div>
+
+      <div class="chapter-list">
+        {
+          chapters.map((chapter) =>
+            chapter.href ? (
+              <a class="chapter-row chapter-row--link" href={chapter.href}>
+                <span class="chapter-row__num">{chapter.num}</span>
+                <span>
+                  <span class="chapter-row__title">{chapter.title}</span>
+                  <span class="chapter-row__desc">{chapter.desc}</span>
+                </span>
+                <span class="chapter-row__meta">
+                  {chapter.meta}
+                  <strong>Tersedia</strong>
+                </span>
+              </a>
+            ) : (
+              <div class="chapter-row">
+                <span class="chapter-row__num">{chapter.num}</span>
+                <span>
+                  <span class="chapter-row__title">{chapter.title}</span>
+                  <span class="chapter-row__desc">{chapter.desc}</span>
+                </span>
+                <span class="chapter-row__meta">{chapter.meta}</span>
+              </div>
+            ),
+          )
+        }
+      </div>
+
+      <p class="label muted chapter-note">
+        Edisi 1.0.0: 7 artikel dan 12 teknik inti sudah tersedia.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--feature">
+    <div class="wrap feature">
+      <div class="feature__head">
+        <p class="label">Teknik 04.1 · BJJ</p>
+        <h2>Shrimp</h2>
+        <p>
+          Geser pinggul untuk membuka ruang. Gerakan kecil yang menentukan
+          apakah seseorang masih tertahan di bawah atau sudah punya jalan
+          untuk berdiri.
+        </p>
+        <a class="link-arrow" href="/teknik/shrimp">Baca halaman teknik</a>
+      </div>
+
+      <div class="feature__sequence">
+        <div class="sequence-step">
+          <span class="label">01</span>
+          <strong>Angkat</strong>
+          <p>Tekan kaki, angkat pinggul. Bahu tetap jadi poros.</p>
+        </div>
+        <div class="sequence-step">
+          <span class="label">02</span>
+          <strong>Geser</strong>
+          <p>Pinggul bergerak menjauh dari tekanan, bukan ke arahnya.</p>
+        </div>
+        <div class="sequence-step">
+          <span class="label">03</span>
+          <strong>Lutut masuk</strong>
+          <p>Lutut mengisi celah. Lengan bawah menyusul sebagai frame.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="label">Aliran</p>
+          <h2>Empat aliran, satu urutan jarak.</h2>
+        </div>
+        <p>
+          Tidak ada aliran yang menang. Yang ada: jarak berbeda, aturan
+          berbeda, dan keterampilan yang berbeda di tiap jarak.
+        </p>
+      </div>
+
+      <div class="disciplines">
+        {
+          disciplines.map((item) => (
+            <article class="discipline">
+              <p class="discipline__tag">{item.tag}</p>
+              <h3>{item.name}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="manifesto">
+    <div class="wrap">
+      <p class="label">Prinsip</p>
+      <p class="manifesto__quote">
+        Kekerasan tidak punya aturan. Yang bisa dilatih adalah jarak, posisi,
+        dan keputusan.
+      </p>
+
+      <div class="manifesto__cols">
+        <div class="manifesto__col">
+          <h3>Hindari dulu.</h3>
+          <p>
+            Peluang terbaik ada sebelum kontak. Lari adalah hasil yang
+            diinginkan, bukan tanda gagal.
+          </p>
+        </div>
+        <div class="manifesto__col">
+          <h3>Satu celah cukup.</h3>
+          <p>
+            Tujuannya keluar, bukan menang. Jangan bertahan lebih lama dari
+            perlu.
+          </p>
+        </div>
+        <div class="manifesto__col">
+          <h3>Setiap teknik bisa gagal.</h3>
+          <p>
+            Halaman di sini menuliskan bagian "kalau gagal", kesalahan umum,
+            dan batas aman. Bukan hanya gerakan yang berhasil.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap end-cta">
+      <div>
+        <p class="label">Mulai</p>
+        <h2>Baca satu halaman. Latih satu gerakan.</h2>
+      </div>
+      <div class="end-cta__actions">
+        <a class="button" href="/teknik/shrimp">Buka halaman shrimp</a>
+        <a class="link-arrow" href="/panduan">Lihat semua bab</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

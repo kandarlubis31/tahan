@@ -1,0 +1,243 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import MarginNote from "../../components/MarginNote.astro";
+import ProgressSummary from "../../components/ProgressSummary.astro";
+
+const techniqueSlugs = [
+  "palm-strike",
+  "front-kick",
+  "tangkisan-360",
+  "wrist-release",
+  "o-goshi",
+  "double-leg",
+  "sprawl",
+  "shrimp",
+  "bridge",
+  "technical-stand-up",
+  "guard",
+  "mount-escape",
+];
+
+const groups = [
+  {
+    range: "01 · Jauh",
+    count: "1 artikel",
+    items: [
+      {
+        num: "01",
+        name: "Sikap siap dan pagar tangan",
+        meta: "Umum · v1.0.0",
+      },
+    ],
+  },
+  {
+    range: "02 · Berdiri",
+    count: "3 teknik",
+    items: [
+      {
+        num: "01",
+        name: "Palm strike",
+        meta: "Krav Maga · Tersedia",
+        href: "/teknik/palm-strike",
+        available: true,
+      },
+      {
+        num: "02",
+        name: "Tendangan depan ke selangkangan",
+        meta: "Krav Maga · Tersedia",
+        href: "/teknik/front-kick",
+        available: true,
+      },
+      {
+        num: "03",
+        name: "Tangkisan 360",
+        meta: "Krav Maga · Tersedia",
+        href: "/teknik/tangkisan-360",
+        available: true,
+      },
+    ],
+  },
+  {
+    range: "03 · Clinch",
+    count: "4 teknik",
+    items: [
+      {
+        num: "01",
+        name: "Lepas cengkeraman",
+        meta: "Judo / gulat · Tersedia",
+        href: "/teknik/wrist-release",
+        available: true,
+      },
+      {
+        num: "02",
+        name: "Bantingan pinggul / O-goshi",
+        meta: "Judo · Tersedia",
+        href: "/teknik/o-goshi",
+        available: true,
+      },
+      {
+        num: "03",
+        name: "Double leg takedown",
+        meta: "Gulat · Tersedia",
+        href: "/teknik/double-leg",
+        available: true,
+      },
+      {
+        num: "04",
+        name: "Sprawl",
+        meta: "Gulat · Tersedia",
+        href: "/teknik/sprawl",
+        available: true,
+      },
+    ],
+  },
+  {
+    range: "04 · Tanah",
+    count: "5 teknik",
+    items: [
+      {
+        num: "01",
+        name: "Shrimp / hip escape",
+        meta: "BJJ · Tersedia",
+        href: "/teknik/shrimp",
+        available: true,
+      },
+      {
+        num: "02",
+        name: "Bridge dan roll / upa",
+        meta: "BJJ · Tersedia",
+        href: "/teknik/bridge",
+        available: true,
+      },
+      {
+        num: "03",
+        name: "Technical stand-up",
+        meta: "BJJ · Tersedia",
+        href: "/teknik/technical-stand-up",
+        available: true,
+      },
+      {
+        num: "04",
+        name: "Bertahan di guard",
+        meta: "BJJ · Tersedia",
+        href: "/teknik/guard",
+        available: true,
+      },
+      {
+        num: "05",
+        name: "Lepas dari mount",
+        meta: "BJJ · Tersedia",
+        href: "/teknik/mount-escape",
+        available: true,
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Teknik"
+  description="Indeks teknik TAHAN: 12 teknik inti dari BJJ, Judo, gulat, dan Krav Maga, disusun menurut jarak."
+>
+  <header class="page-head">
+    <div class="wrap">
+      <div class="page-head__top">
+        <p class="label">Indeks · Edisi 1.0.0</p>
+        <p class="label">12 teknik</p>
+      </div>
+      <h1>Teknik</h1>
+      <p class="page-head__lede">
+        Dua belas teknik inti, disusun menurut jarak. Satu artikel jarak jauh
+        masuk sebagai prasyarat. Halaman teknik memuat langkah, kegagalan yang
+        mungkin, kesalahan umum, latihan, dan batas aman.
+      </p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="wrap">
+      <ProgressSummary slugs={techniqueSlugs} />
+
+      <div class="tech-groups">
+        {
+          groups.map((group) => (
+            <section class="tech-group">
+              <div class="tech-group__head">
+                <p class="label">{group.range}</p>
+                <p class="label">{group.count}</p>
+              </div>
+              <ul class="tech-list">
+                {group.items.map((item: { num: string; name: string; meta: string; href?: string; available?: boolean }) =>
+                  item.href ? (
+                    <li>
+                      <a
+                        class="tech-row tech-row--available"
+                        href={item.href}
+                      >
+                        <span class="tech-row__num">{item.num}</span>
+                        <span class="tech-row__name">{item.name}</span>
+                        <span class="tech-row__meta">{item.meta}</span>
+                      </a>
+                    </li>
+                  ) : (
+                    <li>
+                      <div class="tech-row">
+                        <span class="tech-row__num">{item.num}</span>
+                        <span class="tech-row__name">{item.name}</span>
+                        <span class="tech-row__meta">{item.meta}</span>
+                      </div>
+                    </li>
+                  ),
+                )}
+              </ul>
+            </section>
+          ))
+        }
+      </div>
+
+      <div class="reference">
+        <div>
+          <p class="label">Rujukan · Tanah</p>
+          <h2>Kuncian yang perlu dikenali</h2>
+          <p>
+            RNC, armbar, triangle, dan kimura: mekanisme, bahaya, dan tanda
+            tap. Bukan tutorial menyerang.
+          </p>
+        </div>
+        <a class="button" href="/kuncian">Buka rujukan kuncian</a>
+      </div>
+
+      <MarginNote>
+        <p>
+          Dua belas teknik inti sudah tersedia. Setiap halaman memuat urutan,
+          kegagalan, kesalahan umum, latihan, batas aman, dan sumber.
+        </p>
+      </MarginNote>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .reference {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: clamp(40px, 6vw, 64px);
+    padding-top: 24px;
+    border-top: 1px solid var(--ink);
+  }
+
+  .reference h2 {
+    margin-top: 6px;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+  }
+
+  .reference p:not(.label) {
+    max-width: 52ch;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+</style>

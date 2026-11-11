@@ -1,0 +1,171 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SafetyBox from "../components/SafetyBox.astro";
+---
+
+<BaseLayout
+  title="Tentang"
+  description="Metode, batas, dan status TAHAN: manual bertahan diri yang disusun menurut jarak, bukan menurut aliran."
+>
+  <header class="page-head">
+    <div class="wrap">
+      <div class="page-head__top">
+        <p class="label">Tentang · Edisi 1.0.0</p>
+        <p class="label">Metode dan batas</p>
+      </div>
+      <h1>Tentang</h1>
+      <p class="page-head__lede">
+        TAHAN adalah manual bertahan diri untuk orang yang tidak ingin
+        bergantung pada keberuntungan.
+      </p>
+    </div>
+  </header>
+
+  <div class="wrap chapter-layout">
+    <article class="prose">
+      <h2>Kenapa disusun per jarak</h2>
+      <p>
+        BJJ, Judo, gulat, dan Krav Maga tumbuh dari masalah yang berbeda.
+        Aturan pertandingan, pakaian, dan tujuan latihan membuat teknik mereka
+        tidak selalu bisa dibandingkan langsung. Yang bisa dibandingkan adalah
+        jarak: jauh, berdiri, clinch, dan tanah.
+      </p>
+      <p>
+        Di setiap jarak, pertanyaannya berubah. Di jauh: apakah masih ada jalan
+        untuk pergi. Di berdiri: bagaimana menghindari pukulan pertama. Di
+        clinch: bagaimana lepas sebelum jatuh. Di tanah: bagaimana membuat
+        ruang dan berdiri kembali. Panduan ini mengikuti urutan itu, bukan
+        urutan sabuk atau aliran.
+      </p>
+
+      <h2>Yang diajarkan</h2>
+      <p>
+        Tiga keputusan: hindari, lepas, lari. Teknik dipilih karena bisa
+        dipelajari dalam hitungan sesi, bukan karena terlihat dramatis.
+        Sebagian besar halaman berisi gerakan dasar yang membosankan, karena
+        gerakan itulah yang masih bekerja saat tubuh lelah dan panik.
+      </p>
+      <p>
+        Setiap teknik punya batas. Halaman teknik memuat langkah, bagian "kalau
+        gagal", kesalahan umum, latihan, dan batas aman. Tidak ada janji bahwa
+        satu gerakan selalu berhasil.
+      </p>
+
+      <h2>Yang tidak diajarkan</h2>
+      <ul>
+        <li>Tutorial melepas senjata tajam atau senjata api.</li>
+        <li>Kuncian kaki tingkat lanjut seperti heel hook atau kneebar.</li>
+        <li>Teknik yang bertujuan melumpuhkan, termasuk serangan ke mata.</li>
+        <li>Janji "sekali pukul lumpuh" atau "tiga detik pingsan".</li>
+        <li>Koreografi film sebagai sumber teknik.</li>
+      </ul>
+      <p>
+        Film action dipakai sebagai pembanding: untuk menunjukkan mana yang
+        dilebih-lebihkan, bukan untuk diajarkan. Adegan yang rapi di layar
+        biasanya menghilangkan jarak, napas, dan konsekuensi.
+      </p>
+
+      <h2>Keselamatan</h2>
+      <p>
+        Teknik berpasangan hanya dilatih di matras dan dengan pengawasan.
+        Cekikan, bantingan, dan kuncian tidak dipelajari dari halaman web
+        tanpa pelatih. Jika ragu, jangan lakukan. Rasa takut pada suatu
+        gerakan adalah alasan yang cukup untuk berhenti.
+      </p>
+
+      <SafetyBox>
+        <ul>
+          <li>
+            Situs ini bukan pengganti pelatih, kelas, atau latihan langsung.
+          </li>
+          <li>
+            Situs ini bukan nasihat hukum. Tidak ada nomor pasal yang
+            dicantumkan sebelum diverifikasi.
+          </li>
+          <li>
+            Materi modul perempuan dan panduan orang tua wajib direview
+            pengajar dan praktisi sebelum dipublikasikan.
+          </li>
+          <li>
+            Tidak ada foto anak, foto orang dalam posisi terancam, atau
+            ilustrasi yang menakutkan.
+          </li>
+        </ul>
+      </SafetyBox>
+
+      <h2>Versi dan status</h2>
+      <p>
+        Inti edisi 1.0.0 sudah tersedia: tujuh artikel, empat profil aliran,
+        dua belas teknik, rujukan empat kuncian, tiga rutinitas latihan,
+        glosarium, dan penanda progres. Sitemap ditunda sampai domain situs
+        dikunci. Modul Pertahanan Perempuan dan Panduan Keselamatan Anak untuk
+        Orang Tua direncanakan untuk edisi 1.1.0, setelah inti selesai dan
+        direview.
+      </p>
+      <p>
+        Situs ini tidak memuat iklan dan tidak memasang pelacakan. Tidak ada
+        login. Progres latihan disimpan di perangkat sendiri lewat
+        localStorage, bukan di server.
+      </p>
+
+      <h2>Sumber dan koreksi</h2>
+      <p>
+        Setiap halaman teknik dan artikel mencantumkan sumbernya, dan halaman
+        sumber merangkum bacaan utama. Klaim yang tidak bisa diverifikasi tidak
+        dipakai, termasuk angka tentang frekuensi perkelahian atau durasi
+        pingsan.
+      </p>
+      <p>
+        Koreksi teknis diterima. Kesalahan yang ditemukan setelah rilis dicatat
+        di riwayat versi dan diperbaiki di patch berikutnya.
+      </p>
+    </article>
+
+    <aside class="chapter-aside">
+      <section>
+        <h2>Ringkas</h2>
+        <dl class="meta-list">
+          <div>
+            <dt>Nama</dt>
+            <dd>TAHAN</dd>
+          </div>
+          <div>
+            <dt>Edisi</dt>
+            <dd>1.0.0</dd>
+          </div>
+          <div>
+            <dt>Status</dt>
+            <dd>v1.0.0 core</dd>
+          </div>
+          <div>
+            <dt>Bahasa</dt>
+            <dd>Indonesia</dd>
+          </div>
+          <div>
+            <dt>Cakupan</dt>
+            <dd>4 aliran</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section>
+        <h2>Prinsip</h2>
+        <ul class="aside-list">
+          <li>Escape-first, bukan menang.</li>
+          <li>Tanpa tutorial mematikan.</li>
+          <li>Materi anak untuk orang tua.</li>
+          <li>Wajib review ahli.</li>
+          <li>Tanpa victim-blaming.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Batas</h2>
+        <p class="muted">
+          Manual ini tidak bisa menggantikan matras, pelatih, dan partner yang
+          lebih berpengalaman.
+        </p>
+      </section>
+    </aside>
+  </div>
+</BaseLayout>
