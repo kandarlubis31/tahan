@@ -36,6 +36,21 @@ pnpm build   # output statis di dist/
 pnpm preview # cek hasil build
 ```
 
+## Alur kerja perubahan
+
+Setiap perubahan lewat pull request, termasuk di repo sendiri. Bukan birokrasi:
+PR adalah tempat `pnpm check` dan `pnpm build` berjalan otomatis, dan `main`
+tetap bisa dibaca sebagai daftar perubahan yang sudah lolos.
+
+1. Branch dari `main`, namanya `fix/<ringkas>`, `feat/<ringkas>`, atau
+   `chore/<ringkas>`.
+2. Commit kecil dengan pesan bahasa Indonesia yang menyebut alasannya.
+3. Push branch, buka PR. Template terisi otomatis dari
+   `.github/pull_request_template.md`.
+4. CI (`.github/workflows/ci.yml`) menjalankan `pnpm install --frozen-lockfile`,
+   `pnpm check`, dan `pnpm build` di Node 22.
+5. Merge setelah CI hijau. Jangan commit langsung ke `main`.
+
 ## Stack
 
 - Astro 6, output statis
