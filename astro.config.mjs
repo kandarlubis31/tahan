@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { lastmodByUrl } from './scripts/lastmod.mjs';
 
 export default defineConfig({
   site: 'https://tahan-five.vercel.app',
@@ -7,6 +8,10 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) => !page.endsWith('/404/'),
+      serialize: (item) => {
+        const lastmod = lastmodByUrl.get(item.url);
+        return lastmod ? { ...item, lastmod } : item;
+      },
     }),
   ],
   build: {
