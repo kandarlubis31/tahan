@@ -28,6 +28,18 @@ const d = entry.data;
 const name = d.title.split(":")[0];
 const zone = d.discipline ? zoneByDiscipline[d.discipline] : "Lintas jarak";
 
+const siteUrl = Astro.site?.href.replace(/\/$/, '');
+const pageUrl = siteUrl ? `${siteUrl}${Astro.url.pathname}` : undefined;
+const jsonLd = {
+  '@type': 'Article',
+  headline: d.title,
+  description: d.dek,
+  inLanguage: 'id',
+  dateModified: d.updated,
+  ...(pageUrl ? { url: pageUrl, mainEntityOfPage: pageUrl } : {}),
+  ...(siteUrl ? { publisher: { '@id': `${siteUrl}/#publisher` } } : {}),
+};
+
 const techniques = await getCollection("teknik");
 const related = d.related.flatMap((slug) => {
   const technique = techniques.find((item) => item.id === slug);
@@ -35,7 +47,7 @@ const related = d.related.flatMap((slug) => {
 });
 ---
 
-<BaseLayout title={d.title} description={d.dek}>
+<BaseLayout title={d.title} description={d.dek} jsonLd={jsonLd}>
   <header class="page-head">
     <div class="wrap">
       <div class="page-head__top">

@@ -1,0 +1,264 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const chapters = [
+  { slug: "00-prinsip", num: "00", name: "Prinsip", desc: "Empat catatan sebelum teknik." },
+  { slug: "01-jauh", num: "01", name: "Jauh", desc: "Sikap siap dan pagar tangan." },
+  { slug: "02-berdiri", num: "02", name: "Berdiri", desc: "Kontak pertama dan cara tidak jatuh." },
+  { slug: "03-clinch", num: "03", name: "Clinch", desc: "Grip, bantingan, dan cara melepas." },
+  { slug: "04-tanah", num: "04", name: "Tanah", desc: "Posisi di lantai dan berdiri kembali." },
+];
+
+const techniqueData = (await getCollection("teknik")).sort(
+  (a, b) => a.data.chapter.localeCompare(b.data.chapter) || a.data.order - b.data.order,
+);
+
+const artikel = await getCollection("artikel");
+const aliran = artikel
+  .filter((entry) => entry.data.type === "aliran")
+  .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const catatan = artikel
+  .filter((entry) => entry.data.type === "catatan")
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const originLabel: Record<string, string> = {
+  bjj: "BJJ",
+  judo: "Judo",
+  gulat: "Gulat",
+  "krav-maga": "Krav Maga",
+  umum: "Umum",
+};
+
+const groups = chapters.map((chapter) => ({
+  ...chapter,
+  items: techniqueData.filter((entry) => entry.data.chapter === chapter.slug),
+}));
+
+const referencePages = [
+  { href: "/latihan", name: "Latihan", desc: "Tiga rutinitas latihan mandiri." },
+  { href: "/kuncian", name: "Kuncian", desc: "RNC, armbar, triangle, dan kimura." },
+  { href: "/glosarium", name: "Glosarium", desc: "Istilah yang dipakai di situs ini." },
+  { href: "/sumber", name: "Sumber", desc: "Bacaan dan referensi." },
+  { href: "/tentang", name: "Tentang", desc: "Metode, transparansi, dan batas." },
+];
+
+const totalHalaman = 33;
+---
+
+<BaseLayout
+  title="Katalog"
+  description="Katalog isi TAHAN: 5 bab, 12 teknik, 4 profil aliran, catatan, dan halaman rujukan dalam satu daftar."
+>
+  <header class="page-head">
+    <div class="wrap">
+      <div class="page-head__top">
+        <p class="label">Katalog · Edisi 1.0.0</p>
+        <p class="label">{totalHalaman} halaman</p>
+      </div>
+      <h1>Katalog</h1>
+      <p class="page-head__lede">
+        Semua isi situs dalam satu daftar: bab menurut jarak, dua belas teknik
+        inti, empat profil aliran, catatan, dan halaman rujukan.
+      </p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="label">Panduan</p>
+          <h2>Lima bab, urut jarak.</h2>
+        </div>
+        <p>
+          Setiap bab menempati satu jarak. Urutan ini yang dipakai di seluruh
+          situs, bukan urutan aliran.
+        </p>
+      </div>
+
+      <ul class="catalog-list">
+        {
+          groups.map((group) => (
+            <li>
+              <a href={`/panduan/${group.slug}`}>
+                <span class="label">Bab {group.num}</span>
+                <strong>{group.name}</strong>
+                <span>{group.desc}</span>
+                <span class="label catalog-list__count">{group.items.length} teknik</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="label">Teknik</p>
+          <h2>Dua belas teknik inti.</h2>
+        </div>
+        <p>
+          Nomor mengikuti urutan latihan yang disarankan. Label aliran
+          menunjukkan asal teknik, bukan klaim kepemilikan.
+        </p>
+      </div>
+
+      <div class="tech-groups">
+        {
+          groups
+            .filter((group) => group.items.length > 0)
+            .map((group) => (
+              <section class="tech-group">
+                <div class="tech-group__head">
+                  <p class="label">
+                    {group.num} · {group.name}
+                  </p>
+                  <p class="label">{group.items.length} teknik</p>
+                </div>
+                <ul class="tech-list">
+                  {group.items.map((entry) => (
+                    <li>
+                      <a class="tech-row tech-row--available" href={`/teknik/${entry.id}`}>
+                        <span class="tech-row__num">
+                          {String(entry.data.order).padStart(2, "0")}
+                        </span>
+                        <span class="tech-row__name">{entry.data.title}</span>
+                        <span class="tech-row__meta">
+                          {originLabel[entry.data.origin]} · risiko {entry.data.risk}
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="label">Aliran dan catatan</p>
+          <h2>Profil dan esai.</h2>
+        </div>
+        <p>
+          Profil menjelaskan asal dan batas aliran. Catatan dipakai untuk topik
+          yang butuh narasi, bukan format langkah.
+        </p>
+      </div>
+
+      <ul class="catalog-list">
+        {
+          aliran.map((entry) => (
+            <li>
+              <a href={`/aliran/${entry.data.slug}`}>
+                <span class="label">Aliran</span>
+                <strong>{entry.data.title}</strong>
+                <span>{entry.data.dek}</span>
+              </a>
+            </li>
+          ))
+        }
+        {
+          catatan.map((entry) => (
+            <li>
+              <a href={`/catatan/${entry.id}`}>
+                <span class="label">Catatan</span>
+                <strong>{entry.data.title}</strong>
+                <span>{entry.data.dek}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="label">Rujukan</p>
+          <h2>Halaman lain.</h2>
+        </div>
+        <p>
+          Halaman pendukung: latihan, istilah, kuncian yang perlu dikenali,
+          sumber, dan metode penulisan.
+        </p>
+      </div>
+
+      <ul class="catalog-list">
+        {
+          referencePages.map((page) => (
+            <li>
+              <a href={page.href}>
+                <span class="label">Halaman</span>
+                <strong>{page.name}</strong>
+                <span>{page.desc}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .catalog-list {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--ink);
+    list-style: none;
+  }
+
+  .catalog-list li {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .catalog-list a {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2px 20px;
+    padding: 14px 0;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .catalog-list a:hover strong {
+    color: var(--accent-dark);
+  }
+
+  .catalog-list .label {
+    grid-column: 1;
+    color: var(--muted);
+  }
+
+  .catalog-list strong {
+    grid-column: 1;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  .catalog-list span:not(.label) {
+    grid-column: 1;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+  }
+
+  .catalog-list__count {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+  }
+</style>

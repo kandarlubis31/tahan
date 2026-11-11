@@ -43,9 +43,17 @@ Tagline:
 - Sudah ada: `PLAN.md`, `CONTEXT.md`, scaffold Astro 6, token, font,
   komponen, content collection Zod (teknik, artikel), rute dinamis
   `/teknik/[slug]`, 12 halaman teknik, 5 halaman bab, indeks teknik,
-  halaman aliran, catatan, glosarium, latihan, sumber, tentang, 404,
+  halaman aliran, catatan, glosarium, latihan, sumber, tentang, katalog, 404,
   penanda progres localStorage di halaman teknik.
-- Build terakhir: 33 halaman, 0 error; `pnpm check` 44 file, 0 error.
+- Build terakhir: 34 halaman, 0 error; `pnpm check` 45 file, 0 error.
+- Sitemap aktif lewat `@astrojs/sitemap` (`/sitemap-index.xml`), dirujuk
+  dari `robots.txt`, dan 404 tidak ikut. JSON-LD `WebSite`/`Organization`
+  ada di setiap halaman; halaman teknik memakai `TechArticle`, catatan dan
+  aliran memakai `Article`.
+- Font self-host manual: hanya `.woff2` di `public/fonts`, dua di antaranya
+  di-preload. Paket `@fontsource` sudah dilepas.
+- Katalog project: entri `tahan` sudah masuk `Desktop/Project/catalog`
+  (JSON, Markdown, dashboard, dan override).
 - OG image: `public/og.png`, 1200x630, 54 KB. Meta OG/Twitter ada di
   `BaseLayout`. `site` sudah diisi, jadi canonical dan URL OG absolute.
 - Print: tombol "Cetak halaman" di aside teknik dan tautan "Cetak" di footer.
@@ -310,7 +318,8 @@ Tidak ada putih murni, hitam murni, atau gradien.
 - **Body:** Newsreader 400/400 italic. Paragraf, deck, kutipan.
 - **Label:** IBM Plex Mono 400/500. Kicker, metadata, tombol.
 
-Font self-host (woff2), subset latin, preload display dan body.
+Font self-host (woff2 saja, di `public/fonts`), subset latin, preload display
+dan body.
 
 ### Layout dan komponen
 
@@ -540,8 +549,7 @@ selesai. Yang belum masuk v1.0.0:
    URL OG absolute akan aktif otomatis.
 2. Jalankan Lighthouse mobile pada preview/deploy; target performance,
    a11y, dan SEO >= 95.
-3. Sitemap ditunda atas permintaan user; kerjakan setelah domain dan konten
-   stabil.
+3. Sitemap sudah aktif; tinggal dicek ulang setelah ada domain kustom.
 4. Perbarui `PLAN.md` bila scope berubah.
 
 Jangan sentuh modul v1.1.0 sebelum v1.0.0 selesai.

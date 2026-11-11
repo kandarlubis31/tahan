@@ -7,13 +7,14 @@ bukan menurut aliran.
 
 ## Status
 
-Edisi **1.0.0** — situs lengkap, 33 halaman statis.
+Edisi **1.0.0** — situs lengkap, 34 halaman statis.
 
 - `/` — beranda
 - `/panduan` — 5 bab menurut jarak
 - `/teknik` — 12 teknik inti dengan langkah, kesalahan umum, dan batas aman
 - `/aliran` — 4 profil aliran
 - `/catatan` — 7 artikel
+- `/katalog` — satu daftar untuk seluruh isi situs
 - `/kuncian`, `/latihan`, `/glosarium`, `/sumber`, `/tentang`
 
 Modul 1.1.0 (pertahanan perempuan dan panduan keselamatan anak) belum ada.
@@ -40,7 +41,9 @@ pnpm preview # cek hasil build
 - Astro 6, output statis
 - TypeScript strict
 - CSS vanilla, tanpa framework UI
-- Font self-host: Barlow Condensed, Newsreader, IBM Plex Mono
+- Font self-host (.woff2 di `public/fonts`): Barlow Condensed, Newsreader,
+  IBM Plex Mono
+- Sitemap otomatis (`@astrojs/sitemap`), dirujuk dari `robots.txt`
 - Diagram SVG inline, bukan foto atau gambar AI
 
 ## Deploy
@@ -65,6 +68,7 @@ src/
   scripts/           progres localStorage
   styles/global.css
 public/
+  fonts/
   favicon.svg
   og.png
   robots.txt
