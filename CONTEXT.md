@@ -582,11 +582,12 @@ selesai. Yang belum masuk v1.0.0:
    pada throttling 4G (bukan bandwidth font atau CSS). Opsi yang belum
    diambil: kurangi satu file font, atau `font-display: optional` untuk
    heading — keduanya keputusan desain, harus dikonfirmasi dulu.
-   Regenerate subset font: `pyftsubset <asli>.woff2
-   --unicodes="U+0020-007E,U+00A0,U+00B7,U+00C0-00C5,U+00C7-00CF,
-   U+00D1-00D6,U+00D9-00DC,U+00E0-00E5,U+00E7-00EF,U+00F1-00F6,U+00F9-00FC,
-   U+2013-2014,U+2018-201D,U+2022,U+2026" --layout-features='*'
-   --flavor=woff2 --output-file=public/fonts/<nama>.woff2`.
+   Regenerate subset font: `scripts/subset-fonts.sh <dir-font-asli>`
+   (butuh `pip install fonttools brotli`), lalu `python
+   scripts/check-glyphs.py` setelah build untuk memastikan setiap karakter
+   yang dipakai halaman masih ada di semua face. Butuh font asli versi penuh;
+   file itu tidak disimpan di repo. Menjalankan script pada set glyph yang
+   sama menghasilkan 99.896 B, byte per byte identik dengan yang ter-commit.
 3. Sitemap aktif dan terverifikasi di build. Cek ulang setelah domain kustom.
 4. Perbarui `PLAN.md` bila scope berubah.
 
