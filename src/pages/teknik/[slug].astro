@@ -43,7 +43,7 @@ const chapterName = chapterNames[d.chapter];
 
 const siteUrl = Astro.site?.href.replace(/\/$/, '');
 const pageUrl = siteUrl ? `${siteUrl}${Astro.url.pathname}` : undefined;
-const jsonLd = {
+const article = {
   '@type': 'TechArticle',
   headline: d.title,
   description: d.summary,
@@ -51,8 +51,36 @@ const jsonLd = {
   dateModified: d.updated,
   proficiencyLevel: d.level,
   ...(pageUrl ? { url: pageUrl, mainEntityOfPage: pageUrl } : {}),
+  ...(siteUrl ? { image: `${siteUrl}/og.png` } : {}),
   ...(siteUrl ? { publisher: { '@id': `${siteUrl}/#publisher` } } : {}),
 };
+
+// Mengikuti remah roti yang terlihat di halaman, bukan urutan karangan.
+const breadcrumb = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Teknik',
+      ...(siteUrl ? { item: `${siteUrl}/teknik/` } : {}),
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: `Bab ${chapterNum} · ${chapterName}`,
+      ...(siteUrl ? { item: `${siteUrl}/panduan/${d.chapter}/` } : {}),
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: d.title,
+      ...(pageUrl ? { item: pageUrl } : {}),
+    },
+  ],
+};
+
+const jsonLd = [article, breadcrumb];
 ---
 
 <BaseLayout
