@@ -513,6 +513,16 @@ memastikan setiap `#anchor` benar-benar ada di halaman tujuan. Tautan luar
 tidak diperiksa karena butuh jaringan. Kondisi awal: 34 halaman, 639 tautan
 internal, 124 anchor, tanpa temuan.
 
+Structured data dijaga `pnpm check:jsonld` (`scripts/check-jsonld.mjs`).
+Setiap halaman yang diindeks harus punya satu blok JSON-LD yang bisa
+di-parse, `@context` schema.org, dan node bertipe jelas: `WebSite`,
+`Organization`, satu artikel (`Article`/`TechArticle`), dan `BreadcrumbList`
+kalau ada remah roti. Artikel wajib punya `headline`, `description`,
+`dateModified` berformat `YYYY-MM-DD`, `image` absolut, `author`, dan
+`publisher`; remah roti wajib berurutan 1..n dan butir terakhirnya harus
+halaman itu sendiri. Penulisnya `Organization` TAHAN karena situs ini tidak
+punya profil penulis perorangan, jadi jangan mengarang nama orang.
+
 ### Interaksi
 
 - Peta jarak: tautan anchor + JS kecil, tetap jalan tanpa JS.
