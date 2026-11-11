@@ -3,7 +3,7 @@ type: "jarak"
 title: "Sikap siap dan pagar tangan"
 slug: "sikap-siap-dan-pagar-tangan"
 order: 1
-dek: "Membaca arah, menjaga jarak, dan memilih kapan pergi."
+dek: "Membaca arah, menjaga jarak, dan memilih kapan pergi sebelum kontak pertama."
 lead: "Sebelum ada kontak, masih ada ruang untuk berpikir. Sikap dan tangan dipakai untuk menjaga ruang itu."
 sources:
   - title: "Meditations on Violence"

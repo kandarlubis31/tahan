@@ -495,6 +495,12 @@ Angka di tabel ini dijaga otomatis. `pnpm build && pnpm check:budget`
 CSS, dan total JS, lalu keluar dengan exit 1 kalau ada yang lewat. CI
 menjalankan langkah itu setelah build, jadi budget tidak bisa dilanggar tanpa
 ketahuan.
+
+Metadata dijaga `pnpm check:meta` (`scripts/check-meta.mjs`): judul maks 65
+karakter termasuk akhiran "— TAHAN", deskripsi 60–160 karakter, canonical ada
+untuk halaman yang diindeks, `lang="id"`, tepat satu `<h1>`, dan tidak ada
+judul atau deskripsi kembar antarhalaman. Temuan pertama sudah diperbaiki:
+judul catatan Krav Maga dipendekkan, dua dek artikel ditambah satu klausa.
 | JS v1.0.0 | < 8 KB |
 | Font | < 180 KB |
 | LCP mobile 4G | < 1.5 s |

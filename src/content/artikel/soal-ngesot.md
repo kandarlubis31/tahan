@@ -3,7 +3,7 @@ type: "catatan"
 title: "Soal ngesot: guard pull hanya untuk aturan sport"
 slug: "soal-ngesot"
 order: 2
-dek: "Guard pull masuk akal di kompetisi BJJ; berbahaya di jalan."
+dek: "Guard pull masuk akal di kompetisi BJJ, tetapi berbahaya di jalan."
 lead: "Duduk di matras bisa menjadi pilihan taktis. Duduk di aspal adalah keputusan yang berbeda."
 sources:
   - title: "Jiu-Jitsu University"
