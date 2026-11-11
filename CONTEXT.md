@@ -47,12 +47,15 @@ Tagline:
   penanda progres localStorage di halaman teknik.
 - Build terakhir: 33 halaman, 0 error; `pnpm check` 44 file, 0 error.
 - OG image: `public/og.png`, 1200x630, 54 KB. Meta OG/Twitter ada di
-  `BaseLayout`. Tanpa `site`, URL OG masih relatif (`/og.png`).
+  `BaseLayout`. `site` sudah diisi, jadi canonical dan URL OG absolute.
 - Print: tombol "Cetak halaman" di aside teknik dan tautan "Cetak" di footer.
   CSS print menyembunyikan navigasi, tetapi mempertahankan langkah dan
   daftar sumber.
-- Belum ada repo git (user push sendiri).
-- Node: v25.5.0 (package.json engines 22.x)
+- Repo: https://github.com/kandarlubis31/tahan (publik).
+- Produksi: https://tahan-five.vercel.app, project Vercel `tahan` di akun
+  pribadi `kandarlubis31`. Hanya pemilik; tanpa anggota proyek lain.
+- CI: push ke `main` otomatis deploy produksi lewat integrasi GitHub.
+- Node lokal: v25.5.0 (package.json engines 22.x)
 - pnpm: 12.5.1
 - Stack: **Astro 6**, output statis, TypeScript strict, CSS vanilla.
 - Storage C: sedang ketat (sekitar 8 GB bebas). Jangan tambah dependensi
@@ -80,7 +83,8 @@ Jangan ubah tanpa bertanya ke user.
 9. **Visual:** manual lapangan, kertas hangat, tinta gelap, satu aksen bata,
    tipografi besar, garis rambut, tanpa emoji dan tanpa foto stok. Gambar
    teknik berupa diagram SVG, bukan foto atau gambar AI.
-10. **Repo:** user push sendiri ke GitHub. AI tidak push.
+10. **Repo dan deploy:** GitHub publik `kandarlubis31/tahan`, terhubung ke
+    Vercel pribadi. AI boleh commit dan push untuk perubahan yang diminta.
 
 ---
 

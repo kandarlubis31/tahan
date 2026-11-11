@@ -7,20 +7,16 @@ bukan menurut aliran.
 
 ## Status
 
-Edisi **1.0.0** — fase 1 (vertical slice).
-
-Halaman yang sudah ada:
+Edisi **1.0.0** — situs lengkap, 33 halaman statis.
 
 - `/` — beranda
-- `/panduan` — indeks bab
-- `/panduan/04-tanah` — Bab 04 Tanah
-- `/teknik` — indeks 12 teknik
-- `/teknik/shrimp` — halaman teknik shrimp + 3 diagram SVG
-- `/tentang`
-- `/404`
+- `/panduan` — 5 bab menurut jarak
+- `/teknik` — 12 teknik inti dengan langkah, kesalahan umum, dan batas aman
+- `/aliran` — 4 profil aliran
+- `/catatan` — 7 artikel
+- `/kuncian`, `/latihan`, `/glosarium`, `/sumber`, `/tentang`
 
-Belum ada: bab 00-03, teknik lain, profil aliran, latihan, glosarium, sumber,
-modul 1.1.0.
+Modul 1.1.0 (pertahanan perempuan dan panduan keselamatan anak) belum ada.
 
 ## Jalankan
 
@@ -47,49 +43,32 @@ pnpm preview # cek hasil build
 - Font self-host: Barlow Condensed, Newsreader, IBM Plex Mono
 - Diagram SVG inline, bukan foto atau gambar AI
 
-## Deploy ke Vercel
+## Deploy
 
-Repo sudah disiapkan untuk Vercel:
+- Produksi: https://tahan-five.vercel.app
+- Repo: https://github.com/kandarlubis31/tahan
+- Vercel project `tahan` di akun pribadi `kandarlubis31`.
+- Push ke `main` otomatis memicu deploy produksi.
 
-- `vercel.json` memakai framework Astro, build `pnpm build`, output `dist`.
-- `pnpm-lock.yaml` ada di root project, jadi Vercel bisa memakai pnpm.
-- Tidak perlu adapter; situs sepenuhnya statis.
-
-Langkah:
-
-1. Push repo ke GitHub sendiri.
-2. Di Vercel: **Add New → Project → Import Git Repository**.
-3. Pilih repo, biarkan preset Astro terdeteksi.
-4. Deploy.
-
-Domain belum dikunci. Setelah dapat domain, isi `site` di `astro.config.mjs`
-supaya canonical dan sitemap bisa dibuat.
+`vercel.json` memakai framework Astro, build `pnpm build`, output `dist`.
+Tidak ada adapter; situs sepenuhnya statis. Domain produksi juga diisi sebagai
+`site` di `astro.config.mjs` untuk canonical dan URL OG absolute.
 
 ## Struktur
 
 ```
 src/
-  components/
-    diagrams/ShrimpFigure.astro
-    Figure.astro
-    RangeScale.astro
-    SafetyBox.astro
-    StepList.astro
-    SiteHeader.astro
-    SiteFooter.astro
-  layouts/BaseLayout.astro
-  pages/
-    index.astro
-    panduan/index.astro
-    panduan/04-tanah.astro
-    teknik/index.astro
-    teknik/shrimp.astro
-    tentang.astro
-    404.astro
+  components/        komponen UI dan diagram SVG
+  content/           collection teknik dan artikel (Markdown)
+  layouts/           BaseLayout
+  pages/             rute statis dan dinamis
+  scripts/           progres localStorage
   styles/global.css
 public/
   favicon.svg
+  og.png
   robots.txt
+vercel.json
 ```
 
 ## Aturan konten
@@ -105,5 +84,6 @@ public/
 
 ## Lisensi
 
-Belum ditentukan. Jangan deploy publik sebelum lisensi dan review teknis
-selesai.
+Belum ditentukan. Tanpa berkas lisensi, hak cipta tetap pada penulis; repo
+publik bukan berarti bebas dipakai ulang. Review teknis konten masih perlu
+dilanjutkan.
