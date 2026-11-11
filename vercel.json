@@ -2,5 +2,34 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "astro",
   "buildCommand": "pnpm build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "headers": [
+    {
+      "source": "/_astro/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/(favicon.svg|og.png)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
+    }
+  ]
 }
