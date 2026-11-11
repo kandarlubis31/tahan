@@ -31,4 +31,5 @@ jobs:
 
       - run: pnpm build
       - run: pnpm check:budget
+      - run: pnpm check:meta
       - run: pnpm check:links

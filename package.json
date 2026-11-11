@@ -15,6 +15,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "check:budget": "node scripts/check-budget.mjs",
+    "check:meta": "node scripts/check-meta.mjs",
     "check:links": "node scripts/check-links.mjs"
   },
   "dependencies": {

@@ -4,7 +4,7 @@
 //
 // Tautan luar tidak diperiksa: butuh jaringan dan bikin CI rapuh.
 import { readdirSync, readFileSync, existsSync, statSync } from "node:fs";
-import { join, posix } from "node:path";
+import { join } from "node:path";
 
 const DIST = "dist";
 

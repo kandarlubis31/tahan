@@ -484,6 +484,11 @@ Schema harus menolak halaman teknik yang tidak punya `safety` atau `sources`.
 |---|---|
 | HTML per halaman | < 30 KB |
 | CSS total | < 25 KB |
+| JS v1.0.0 | < 8 KB |
+| Font | < 180 KB |
+| LCP mobile 4G | < 1.5 s |
+| CLS | 0 |
+| Lighthouse mobile | >= 95 performance, a11y, SEO |
 
 Catatan ukuran HTML: sejak CSS di-inline penuh (§2), HTML mentah memuat CSS
 27 KB utuh, jadi berkas mentah beranda 39,6 KB dan halaman dalam 46–52 KB.
@@ -496,16 +501,17 @@ CSS, dan total JS, lalu keluar dengan exit 1 kalau ada yang lewat. CI
 menjalankan langkah itu setelah build, jadi budget tidak bisa dilanggar tanpa
 ketahuan.
 
+Metadata dijaga `pnpm check:meta` (`scripts/check-meta.mjs`): judul maks 65
+karakter termasuk akhiran "— TAHAN", deskripsi 60–160 karakter, canonical ada
+untuk halaman yang diindeks, `lang="id"`, tepat satu `<h1>`, dan tidak ada
+judul atau deskripsi kembar antarhalaman. Temuan pertama sudah diperbaiki:
+judul catatan Krav Maga dipendekkan, dua dek artikel ditambah satu klausa.
+
 Tautan juga dijaga: `pnpm check:links` (`scripts/check-links.mjs`) membaca
 `dist/`, memastikan setiap tautan internal menuju halaman yang ada, dan
 memastikan setiap `#anchor` benar-benar ada di halaman tujuan. Tautan luar
 tidak diperiksa karena butuh jaringan. Kondisi awal: 34 halaman, 639 tautan
 internal, 124 anchor, tanpa temuan.
-| JS v1.0.0 | < 8 KB |
-| Font | < 180 KB |
-| LCP mobile 4G | < 1.5 s |
-| CLS | 0 |
-| Lighthouse mobile | >= 95 performance, a11y, SEO |
 
 ### Interaksi
 

@@ -1,6 +1,6 @@
 ---
 type: "catatan"
-title: "Krav Maga di film: apa yang benar dan apa yang dilebih-lebihkan"
+title: "Krav Maga di film: yang benar dan yang dilebih-lebihkan"
 slug: "krav-maga-di-film"
 order: 1
 dek: "Film memakai gaya sebagai pembanding, bukan bukti efektivitas."
