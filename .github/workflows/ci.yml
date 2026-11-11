@@ -33,3 +33,4 @@ jobs:
       - run: pnpm check:budget
       - run: pnpm check:meta
       - run: pnpm check:links
+      - run: pnpm check:jsonld

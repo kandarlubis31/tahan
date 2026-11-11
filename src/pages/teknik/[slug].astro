@@ -53,6 +53,8 @@ const article = {
   ...(pageUrl ? { url: pageUrl, mainEntityOfPage: pageUrl } : {}),
   ...(siteUrl ? { image: `${siteUrl}/og.png` } : {}),
   ...(siteUrl ? { publisher: { '@id': `${siteUrl}/#publisher` } } : {}),
+
+  ...(siteUrl ? { author: { '@type': 'Organization', name: 'TAHAN', url: siteUrl } } : {}),
 };
 
 // Mengikuti remah roti yang terlihat di halaman, bukan urutan karangan.
