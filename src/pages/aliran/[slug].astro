@@ -37,6 +37,7 @@ const jsonLd = {
   inLanguage: 'id',
   dateModified: d.updated,
   ...(pageUrl ? { url: pageUrl, mainEntityOfPage: pageUrl } : {}),
+  ...(siteUrl ? { image: `${siteUrl}/og.png` } : {}),
   ...(siteUrl ? { publisher: { '@id': `${siteUrl}/#publisher` } } : {}),
 };
 

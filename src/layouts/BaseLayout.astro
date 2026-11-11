@@ -7,7 +7,7 @@ interface Props {
   title: string;
   description: string;
   noindex?: boolean;
-  jsonLd?: Record<string, unknown>;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   ogType?: 'website' | 'article';
   modifiedTime?: string;
 }
@@ -48,7 +48,7 @@ const structuredData = siteUrl
           name: 'TAHAN',
           url: siteUrl,
         },
-        ...(jsonLd ? [jsonLd] : []),
+        ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []),
       ],
     }
   : undefined;
