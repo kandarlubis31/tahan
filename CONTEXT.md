@@ -46,11 +46,21 @@ Tagline:
   halaman aliran, catatan, glosarium, latihan, sumber, tentang, katalog, 404,
   penanda progres localStorage di halaman teknik.
 - Build terakhir: 34 halaman, 0 error; `pnpm check` 45 file, 0 error.
-- Lighthouse mobile (2026-11-11): performance 99, accessibility 100,
-  best-practices 100, SEO 100. FCP 1.5 s, LCP 1.7 s (target < 1.5 s belum
-  terpenuhi di throttling mobile; lihat §11), CLS 0, TBT 0 ms.
+- Lighthouse mobile (2026-11-12): performance 100, accessibility 100,
+  best-practices 100, SEO 100, CLS 0, TBT 0 ms. LCP: beranda 1.37 s,
+  `panduan/03-clinch/` 1.36 s, `teknik/shrimp/` 1.53 s,
+  `catatan/krav-maga-di-film/` 1.66 s (median 2–3 run). Tiga dari empat
+  template sudah di bawah target 1.5 s; halaman catatan panjang masih di
+  atas target, lihat §11.
   Perbaikan yang menyusul audit: `--muted` digelapkan `#6e675a` → `#6a6357`
   karena kontras di atas `--paper-2` hanya 4.37:1 (wajib 4.5:1).
+- LCP 1.7 s → 1.37 s berasal dari dua hal: (1) font di-subset ulang
+  145 KB → 100 KB (156 glyph per file: ASCII, Latin-1 minus `ÆØæøßðþ`, tanda
+  baca tipografi), (2) CSS inline penuh lewat `inlineStylesheets: 'always'`
+  di `astro.config.mjs`, jadi tidak ada stylesheet render-blocking. Efek
+  samping: HTML mentah ikut membesar (beranda 39,6 KB, halaman dalam ~46–52
+  KB), tetapi terkompresi hanya ~9–10 KB per halaman. Kalau menambah
+  karakter di luar set subset, regenerate font dulu (perintah ada di §11).
 - Sitemap aktif lewat `@astrojs/sitemap` (`/sitemap-index.xml`), dirujuk
   dari `robots.txt`, dan 404 tidak ikut. JSON-LD `WebSite`/`Organization`
   ada di setiap halaman; halaman teknik memakai `TechArticle`, catatan dan
@@ -323,7 +333,8 @@ Tidak ada putih murni, hitam murni, atau gradien.
 - **Body:** Newsreader 400/400 italic. Paragraf, deck, kutipan.
 - **Label:** IBM Plex Mono 400/500. Kicker, metadata, tombol.
 
-Font self-host (woff2 saja, di `public/fonts`), subset latin, preload display
+Font self-host (woff2 saja, di `public/fonts`), subset latin 156 glyph per
+file (ASCII + Latin-1 minus `ÆØæøßðþ` + tanda baca tipografi), preload display
 dan body.
 
 ### Layout dan komponen
@@ -473,6 +484,10 @@ Schema harus menolak halaman teknik yang tidak punya `safety` atau `sources`.
 |---|---|
 | HTML per halaman | < 30 KB |
 | CSS total | < 25 KB |
+
+Catatan: sejak CSS di-inline penuh (§2), HTML mentah memuat CSS 27 KB utuh,
+sehingga berkas mentah beranda 39,6 KB. Patokan 30 KB dihitung dari HTML
+terkompresi (~9–10 KB per halaman); angkanya tetap di bawah patokan.
 | JS v1.0.0 | < 8 KB |
 | Font | < 180 KB |
 | LCP mobile 4G | < 1.5 s |
@@ -552,11 +567,19 @@ selesai. Yang belum masuk v1.0.0:
 
 1. `site` sudah diisi (`https://tahan-five.vercel.app`); canonical dan URL OG
    absolute aktif. Ganti nilainya kalau domain kustom dikunci.
-2. Lighthouse mobile sudah dijalankan (2026-11-11): performance 99,
-   accessibility 100, best-practices 100, SEO 100 — semua di atas target 95.
-   Sisa satu metrik di bawah target: LCP 1.7 s (target < 1.5 s) pada
-   throttling mobile 4G. Kandidat perbaikan: inline CSS kritis atau kurangi
-   render-blocking, ukur ulang setelah perubahan.
+2. Lighthouse mobile sudah dijalankan (2026-11-12): performance 100,
+   accessibility 100, best-practices 100, SEO 100. LCP beranda 1.37 s,
+   halaman bab 1.36 s, halaman teknik 1.53 s, halaman catatan panjang
+   1.66 s. Sisa pekerjaan: halaman catatan panjang masih di atas target
+   1.5 s karena `styleLayout` ~620 ms saat render pertama halaman panjang
+   pada throttling 4G (bukan bandwidth font atau CSS). Opsi yang belum
+   diambil: kurangi satu file font, atau `font-display: optional` untuk
+   heading — keduanya keputusan desain, harus dikonfirmasi dulu.
+   Regenerate subset font: `pyftsubset <asli>.woff2
+   --unicodes="U+0020-007E,U+00A0,U+00B7,U+00C0-00C5,U+00C7-00CF,
+   U+00D1-00D6,U+00D9-00DC,U+00E0-00E5,U+00E7-00EF,U+00F1-00F6,U+00F9-00FC,
+   U+2013-2014,U+2018-201D,U+2022,U+2026" --layout-features='*'
+   --flavor=woff2 --output-file=public/fonts/<nama>.woff2`.
 3. Sitemap aktif dan terverifikasi di build. Cek ulang setelah domain kustom.
 4. Perbarui `PLAN.md` bila scope berubah.
 

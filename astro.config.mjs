@@ -11,6 +11,7 @@ export default defineConfig({
   ],
   build: {
     format: 'directory',
+    inlineStylesheets: 'always',
   },
   devToolbar: {
     enabled: false,
