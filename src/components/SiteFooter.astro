@@ -1,3 +1,24 @@
+---
+import { isActivePath } from "../scripts/nav";
+
+const path = Astro.url.pathname;
+const links = [
+  { href: "/panduan", label: "Panduan" },
+  { href: "/panduan/04-tanah", label: "Bab 04 · Tanah" },
+  { href: "/teknik", label: "Indeks teknik" },
+  { href: "/katalog", label: "Katalog" },
+  { href: "/kuncian", label: "Kuncian" },
+  { href: "/sumber", label: "Sumber" },
+  { href: "/tentang", label: "Tentang" },
+];
+
+// Hanya satu tautan yang boleh bertanda aktif. `/panduan` juga cocok untuk
+// setiap bab, jadi yang dipakai adalah kecocokan paling spesifik.
+const match = links
+  .filter((link) => isActivePath(path, link.href))
+  .sort((a, b) => b.href.length - a.href.length)[0];
+---
+
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
@@ -8,13 +29,16 @@
         </p>
       </div>
       <nav class="footer-nav" aria-label="Navigasi footer">
-        <a href="/panduan">Panduan</a>
-        <a href="/panduan/04-tanah">Bab 04 · Tanah</a>
-        <a href="/teknik">Indeks teknik</a>
-        <a href="/katalog">Katalog</a>
-        <a href="/kuncian">Kuncian</a>
-        <a href="/sumber">Sumber</a>
-        <a href="/tentang">Tentang</a>
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              aria-current={match?.href === link.href ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          ))
+        }
         <button class="footer-print" type="button" data-print>Cetak</button>
       </nav>
       <div class="footer-meta">
