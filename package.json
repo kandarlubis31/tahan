@@ -18,7 +18,8 @@
     "check:meta": "node scripts/check-meta.mjs",
     "check:links": "node scripts/check-links.mjs",
     "check:jsonld": "node scripts/check-jsonld.mjs",
-    "check:structure": "node scripts/check-structure.mjs"
+    "check:structure": "node scripts/check-structure.mjs",
+    "check:all": "pnpm check && pnpm build && pnpm check:budget && pnpm check:meta && pnpm check:links && pnpm check:jsonld && pnpm check:structure"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
