@@ -523,6 +523,15 @@ kalau ada remah roti. Artikel wajib punya `headline`, `description`,
 halaman itu sendiri. Penulisnya `Organization` TAHAN karena situs ini tidak
 punya profil penulis perorangan, jadi jangan mengarang nama orang.
 
+Struktur HTML dijaga `pnpm check:structure` (`scripts/check-structure.mjs`):
+tidak ada `id` ganda dalam satu halaman, tepat satu `<main>`, tautan "lewati ke
+isi" menuju id yang ada, setiap tautan dan tombol punya nama aksesibel, satu
+navigasi hanya punya satu `aria-current`, dan judul tidak melompat tingkat.
+Pemeriksaan ini menemukan satu masalah nyata: bab 00 merender empat artikel
+prinsip dan semuanya memakai `id="batas"`. Id judul artikel prinsip sekarang
+diberi awalan slug lewat `scripts/rehype-scope-heading-ids.mjs`, karena
+artikel prinsip tidak punya halaman sendiri sehingga id berscope aman.
+
 ### Interaksi
 
 - Peta jarak: tautan anchor + JS kecil, tetap jalan tanpa JS.

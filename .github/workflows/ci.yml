@@ -34,3 +34,4 @@ jobs:
       - run: pnpm check:meta
       - run: pnpm check:links
       - run: pnpm check:jsonld
+      - run: pnpm check:structure
