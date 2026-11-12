@@ -31,16 +31,33 @@ pnpm dev
 Buka `http://localhost:4321`.
 
 ```bash
-pnpm check   # TypeScript + Astro
-pnpm build   # output statis di dist/
-pnpm preview # cek hasil build
+pnpm check     # TypeScript + Astro
+pnpm build     # output statis di dist/
+pnpm check:all # build lalu semua pemeriksaan
+pnpm preview   # cek hasil build
 ```
+
+Semua pemeriksaan membaca hasil build di `dist/`, jadi `pnpm build` harus jalan
+lebih dulu. `pnpm check:all` melakukan itu lengkap dengan semua pemeriksaan di
+bawah, dan itu yang perlu hijau sebelum push.
+
+## Pemeriksaan
+
+| Perintah | Yang diperiksa |
+| --- | --- |
+| `pnpm check` | tipe TypeScript dan validitas Astro |
+| `pnpm check:budget` | ukuran font, CSS, JS, HTML gzip, dan OG image |
+| `pnpm check:meta` | judul, deskripsi, canonical, OG, dan urutan judul |
+| `pnpm check:links` | tautan internal dan anchor yang mati |
+| `pnpm check:jsonld` | structured data tiap halaman |
+| `pnpm check:structure` | id ganda, satu `<main>`, nama aksesibel, `aria-current`, judul melompat |
 
 ## Alur kerja perubahan
 
 Setiap perubahan lewat pull request, termasuk di repo sendiri. Bukan birokrasi:
-PR adalah tempat `pnpm check` dan `pnpm build` berjalan otomatis, dan `main`
-tetap bisa dibaca sebagai daftar perubahan yang sudah lolos.
+PR adalah tempat `pnpm check`, `pnpm build`, dan pemeriksaan hasil build
+berjalan otomatis, dan `main` tetap bisa dibaca sebagai daftar perubahan yang
+sudah lolos.
 
 1. Branch dari `main`, namanya `fix/<ringkas>`, `feat/<ringkas>`, atau
    `chore/<ringkas>`.
@@ -48,7 +65,8 @@ tetap bisa dibaca sebagai daftar perubahan yang sudah lolos.
 3. Push branch, buka PR. Template terisi otomatis dari
    `.github/pull_request_template.md`.
 4. CI (`.github/workflows/ci.yml`) menjalankan `pnpm install --frozen-lockfile`,
-   `pnpm check`, dan `pnpm build` di Node 22.
+   `pnpm check`, `pnpm build`, dan kelima pemeriksaan hasil build di Node 22.
+   Daftar yang sama bisa dijalankan lokal lewat `pnpm check:all`.
 5. Merge setelah CI hijau. Jangan commit langsung ke `main`.
 
 ## Stack
@@ -80,8 +98,9 @@ src/
   content/           collection teknik dan artikel (Markdown)
   layouts/           BaseLayout
   pages/             rute statis dan dinamis
-  scripts/           progres localStorage
+  scripts/           progres localStorage dan penanda tautan aktif
   styles/global.css
+scripts/             pemeriksa hasil build (Node)
 public/
   fonts/
   favicon.svg
